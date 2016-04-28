@@ -1,0 +1,29 @@
+<head>
+  <title>simple</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+
+  {{> hello}}
+  {{> chart}}
+
+  {{> graph}}
+
+
+</body>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="graph">
+  {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
+</template>
+
+<template name="chart">
+    <h2>Chart:Chart</h2>
+     <canvas id="myChart" width="400" height="400"></canvas>
+
+</template>
