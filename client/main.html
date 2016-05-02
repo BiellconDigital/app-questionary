@@ -1,29 +1,16 @@
 <head>
-  <title>simple</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="ion-md-input/css/ion-md-input.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+
+  <base href="/">
+  <title>Socially</title>
 </head>
-
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> chart}}
-
-  {{> graph}}
-
-
+<ion-nav-view></ion-nav-view>
+  <init></init>
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
-<template name="graph">
-  {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
-</template>
-
-<template name="chart">
-    <h2>Chart:Chart</h2>
-     <canvas id="myChart" width="400" height="400"></canvas>
-
-</template>
