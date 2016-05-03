@@ -76,4 +76,28 @@ p {
 .social-login {
     position: fixed;
     bottom: 0;
+
 }
+
+
+
+.pane {
+    background: url('../img/profile-bg.jpg') no-repeat center center fixed !important;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover !important;
+}
+
+
+#content-center {
+  display: table !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#content-center div.scroll {
+  display: table-cell !important;
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+

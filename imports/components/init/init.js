@@ -1,7 +1,8 @@
 'use strict';
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import cuestionaryList from '../cuestionaryList/cuestionaryList';
+import { name as cuestionary } from '../cuestionary/cuestionary';
+import { name as welcome } from '../welcome/welcome';
 import ngSanitize from 'angular-sanitize';
 import uiRouter from 'angular-ui-router';
 import ngAnimate from 'angular-animate';
@@ -14,38 +15,23 @@ import 'ionic-sdk/release/js/ionic-angular';
 import './web.html';
 
 function Init ($scope, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-    console.log($scope.$parent)
     // Set Header
-//    $scope.$parent.showHeader();
-//    $scope.$parent.clearFabs();
-    $scope.isExpanded = false;
-//    $scope.$parent.setExpanded(false);
-//    $scope.$parent.setHeaderFab(false);
+//    $scope.showHeader();
+//    $scope.clearFabs();
+//    $scope.isExpanded = false;
+//    $scope.setExpanded(false);
+//    $scope.setHeaderFab(false);
 
     // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up'
-        });
-    }, 300);
 
-    $timeout(function() {
+/*    $timeout(function() {
         ionicMaterialMotion.fadeSlideInRight({
             startVelocity: 3000
         });
     }, 700);
-
+*/
     // Set Ink
     ionicMaterialInk.displayEffect();
-
-    this.tasks = [{
-      text: 'This is task 1'
-    }, {
-      text: 'This is task 2'
-    }, {
-      text: 'This is task 3'
-    }];
-
 
 }
 Init.$inject = ["$scope", "$timeout", "ionicMaterialMotion", "ionicMaterialInk"];
@@ -59,7 +45,9 @@ export default angular.module(name, [
   uiRouter,
   'ionic',
   'ionic-material',
-  'ionMdInput'
+  'ionMdInput',
+  welcome,
+  cuestionary
 ])
 .component(name, {
   templateUrl: 'imports/components/init/web.html',
@@ -69,12 +57,15 @@ export default angular.module(name, [
   .config(config)
   .run(run);
 
-function config($locationProvider, $urlRouterProvider) {
+function config($locationProvider, $urlRouterProvider, $compileProvider, $logProvider) {
   'ngInject';
 
-  $locationProvider.html5Mode(false);
+  $locationProvider.html5Mode(true);
 
-  //$urlRouterProvider.otherwise('/parties');
+  $urlRouterProvider.otherwise('/');
+
+  $compileProvider.debugInfoEnabled(false);
+  $logProvider.debugEnabled(false);
 
 //  const iconPath =  '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/';
 
