@@ -1,4 +1,5 @@
 'use strict';
+import { Meteor } from 'meteor/meteor';
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import { name as cuestionary } from '../cuestionary/cuestionary';
@@ -9,12 +10,43 @@ import ngAnimate from 'angular-animate';
 
 import 'ionic-sdk/release/js/ionic';
 import 'ionic-sdk/release/js/ionic-angular';
-//import 'ionic-material/dist/ionic-material';
-//import 'ionic-material/dist/ionic-material.min.css';
+
+import { User } from '../../api/user/user.js';
 
 import './web.html';
 
-function Init ($scope, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+function Init ($scope, $rootScope, $timeout, $reactive, ionicMaterialMotion, ionicMaterialInk) {
+
+  $rootScope.currentUser = null;
+  $reactive(this).attach($scope);
+      
+  if (localStorage['user'] === undefined) {
+
+      console.log("iniciando insercion");
+
+
+      // Meteor.call('saveUser', {username: 'invitado', completeCuestionary: false, createdAt : new Date()}, 
+      //   function(error, result){
+      //     console.log("usuario insertado");
+      //     console.log(result);
+      // });
+      var userId = User.insert({username: 'invitado', completeCuestionary: false, createdAt : new Date()});
+      $rootScope.currentUser = {
+        _id: userId,
+        username: 'invitado', completeCuestionary: false, createdAt : new Date()
+      };
+
+      //Meteor.subscribe('saveUser', $rootScope.currentUser);
+      console.log($rootScope.currentUser);
+      console.log("finalizando insercion");
+      localStorage['user'] = JSON.stringify($rootScope.currentUser);
+  } else {
+      $rootScope.currentUser = JSON.parse(localStorage['user']);
+      console.log("usuario registrado");
+      console.log(localStorage['user']);
+  }
+
+
     // Set Header
 //    $scope.showHeader();
 //    $scope.clearFabs();
@@ -31,10 +63,10 @@ function Init ($scope, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     }, 700);
 */
     // Set Ink
-    ionicMaterialInk.displayEffect();
+//    ionicMaterialInk.displayEffect();
 
 }
-Init.$inject = ["$scope", "$timeout", "ionicMaterialMotion", "ionicMaterialInk"];
+Init.$inject = ["$scope", "$rootScope", "$timeout", "$reactive", "ionicMaterialMotion", "ionicMaterialInk"];
 
 
 const name = 'init';
@@ -57,7 +89,7 @@ export default angular.module(name, [
   .config(config)
   .run(run);
 
-function config($locationProvider, $urlRouterProvider, $compileProvider, $logProvider) {
+function config($locationProvider, $urlRouterProvider, $compileProvider, $logProvider, $ionicConfigProvider) {
   'ngInject';
 
   $locationProvider.html5Mode(true);
@@ -66,6 +98,9 @@ function config($locationProvider, $urlRouterProvider, $compileProvider, $logPro
 
   $compileProvider.debugInfoEnabled(false);
   $logProvider.debugEnabled(false);
+
+  // Turn off caching for demo simplicity's sake
+  $ionicConfigProvider.views.maxCache(0);
 
 //  const iconPath =  '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/';
 
@@ -86,7 +121,7 @@ function config($locationProvider, $urlRouterProvider, $compileProvider, $logPro
       iconPath + 'svg-sprite-image.svg');*/
 }
 
-function run($rootScope, $state) {
+function run($rootScope, $state, $ionicPlatform) {
   'ngInject';
   console.log("init run...")
 
@@ -95,6 +130,21 @@ function run($rootScope, $state) {
      
     }
   );
+
+  $ionicPlatform.ready(function() {
+
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      if (window.cordova && window.cordova.plugins.Keyboard) {
+          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      }
+      if (window.StatusBar) {
+          // org.apache.cordova.statusbar required
+          StatusBar.styleDefault();
+      }
+
+  });
+
 }
 
 

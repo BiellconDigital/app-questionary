@@ -17,6 +17,8 @@ const name = 'welcome';
 class WelcomeCtrl {
   constructor($scope, $timeout, $q, ionicMaterialMotion, ionicMaterialInk) {
     'ngInject';
+
+    console.log("iniciando welcome...");
     
 
     $timeout(function() {
@@ -28,6 +30,10 @@ class WelcomeCtrl {
     ionicMaterialInk.displayEffect();
 
     
+    $scope.$on('$destroy', function() {
+      console.log("destruyendo hoteles...");
+    });
+
   }
 }
 

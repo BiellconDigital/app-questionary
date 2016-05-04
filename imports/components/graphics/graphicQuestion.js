@@ -2,8 +2,13 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
+import ngSanitize from 'angular-sanitize';
+import ngAnimate from 'angular-animate';
+
+import 'ionic-sdk/release/js/ionic';
+import 'ionic-sdk/release/js/ionic-angular';
+
 import { Question } from '../../api/question/question.js';
-import { Answer } from '../../api/answer/answer.js';
 
 
 import './cuestionary.html';
@@ -48,13 +53,15 @@ CuestionaryListCtrl.$inject = ["$scope", "$timeout", "ionicMaterialMotion", "ion
 const name = 'cuestionary';
 
 class CuestionaryListCtrl {
-  constructor($scope, $rootScope, $timeout, $reactive, $stateParams, $state, 
-                ionicMaterialMotion, ionicMaterialInk) {
+  constructor($scope, $timeout, $reactive, $stateParams, ionicMaterialMotion, ionicMaterialInk) {
     'ngInject';
-
-    this.answerText = null;
-    this.$state = $state;
-    this.$rootScope = $rootScope;
+    $scope.tasks = [{
+      text: 'This is task 1'
+    }, {
+      text: 'This is task 2'
+    }, {
+      text: 'This is task 3'
+    }];
 
     $timeout(function() {
         ionicMaterialMotion.slideUp({
@@ -67,10 +74,9 @@ class CuestionaryListCtrl {
     $reactive(this).attach($scope);
 
     this.questionId = $stateParams.questionId;
-    this.nextQuestionId = this.questionId + 1;
-    $scope.viewModel(this);
-    console.log($rootScope.currentUser);
 
+    $scope.viewModel(this);
+ 
     this.helpers({
       question() {
         return Question.findOne({_id: $stateParams.questionId});
@@ -78,21 +84,6 @@ class CuestionaryListCtrl {
     });
 
   }
-
-  saveAnswerAndNext() {
-    console.log("valores answer:: ");
-    console.log(this.questionId);
-    console.log(this.answerText);
-    Answer.insert({
-      user: this.$rootScope.currentUser._id,
-      question: this.questionId,
-      text: this.answerText,
-      createdAt : new Date()
-    });
-
-    this.$state.transitionTo('cuestionary', {questionId: this.nextQuestionId});
-  }
-
 }
 
 export default angular.module(name, [

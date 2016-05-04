@@ -1,10 +1,24 @@
+.fondoStandar {
+    background-color: #9a4bc1 !important;
+}
 
+.footerStandar {
+    background-color: black;
+    opacity: 0.3;
+}
+.footerStandar a {
+    font-size: 1.3em;
+    color: white !important;
+    text-decoration: none;
+    opacity: 1;
+}
 /* General
 ==================================*/
 h1 {
     color: #fff;
     text-shadow: 0 1px 0px #000;
     font-size: 42px;
+
 }
 
 
@@ -15,10 +29,6 @@ h1 {
     padding-top: 30px;
 }
 
-p {
-    color: #555;
-    margin: 0 0 25px;
-}
 
 .scroll {
     height: 100%;
@@ -73,15 +83,7 @@ p {
     width: 125px;
 }
 
-.social-login {
-    position: fixed;
-    bottom: 0;
-
-}
-
-
-
-.pane {
+.content-welcome {
     background: url('../img/profile-bg.jpg') no-repeat center center fixed !important;
     -webkit-background-size: cover;
     -moz-background-size: cover;
