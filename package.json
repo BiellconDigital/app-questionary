@@ -13,6 +13,8 @@
     "angular-sanitize": "^1.5.5",
     "angular-simple-logger": "^0.1.7",
     "angular-ui-router": "^0.2.18",
+    "d3": "^3.5.17",
+    "d3-cloud": "^1.2.1",
     "ionic-sdk": "^1.2.4",
     "meteor-node-stubs": "~0.2.0",
     "underscore": "^1.8.3",

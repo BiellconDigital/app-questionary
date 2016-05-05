@@ -4,6 +4,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import { name as cuestionary } from '../cuestionary/cuestionary';
 import { name as welcome } from '../welcome/welcome';
+import { name as graphicQuestion } from '../graphics/graphicQuestion';
 import ngSanitize from 'angular-sanitize';
 import uiRouter from 'angular-ui-router';
 import ngAnimate from 'angular-animate';
@@ -79,7 +80,8 @@ export default angular.module(name, [
   'ionic-material',
   'ionMdInput',
   welcome,
-  cuestionary
+  cuestionary,
+  graphicQuestion
 ])
 .component(name, {
   templateUrl: 'imports/components/init/web.html',

@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import { Question } from '../../api/question/question.js';
+import { User } from '../../api/user/user.js';
 
 //export const Answer = new Mongo.Collection('answer');
 
