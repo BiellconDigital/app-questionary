@@ -53,7 +53,7 @@ CuestionaryListCtrl.$inject = ["$scope", "$timeout", "ionicMaterialMotion", "ion
 const name = 'graphicQuestion';
 
 class CuestionaryListCtrl {
-  constructor($scope, $timeout, $reactive, $stateParams, $meteor, ionicMaterialMotion, ionicMaterialInk) {
+  constructor($scope, $timeout, $reactive, $stateParams, ionicMaterialMotion, ionicMaterialInk) {
     'ngInject';
 
     ionicMaterialInk.displayEffect();
@@ -74,19 +74,10 @@ class CuestionaryListCtrl {
       }
     });
 
-    // this.helpers({
-    //   taskss() {
-    //     return Tasks.find({});
-    //   }
-    // });
 
-
-  $scope.wordsAnswer = [];//[".NET", "Silverlight", "jQuery", "CSS3", "HTML5", "JavaScript", "SQL","C#"];
-   this.autorun(() => {
-     console.log($scope.wordsAnswer);
-   });
+  this.wordsAnswer = ["java"];//[".NET", "Silverlight", "jQuery", "CSS3", "HTML5", "JavaScript", "SQL","C#"];
  
-
+   //console.log(this.answers)
     // $timeout(function() {
     //   this.wordsAnswer.push("lili");
     // }, 2200);
@@ -96,12 +87,23 @@ class CuestionaryListCtrl {
   //   return Answer.find({question: $scope.getReactively('question')});
   // });
 
-var answersResult = Answer.find({question: $scope.getReactively('question')});
+  this.autorun(() => {
+    console.log('Autorun!!', this.getReactively('wordsAnswer'));
+  });
+
+
+var answersResult = Answer.find({question: "1"});
+console.log(answersResult.fetch())
 answersResult.forEach(function (answer) {
   console.log(answer.text);
-  $scope.wordsAnswer.push(answer.text);
+  this.wordsAnswer.push(answer.text);
 });
 
+answersResult.map( function(u) {
+  console.log(u.text);
+  this.wordsAnswer.push(u.text);
+ return u.text; 
+} );
 
 //  this.arrayAnswer = Answer.find();
 
@@ -120,7 +122,7 @@ answersResult.forEach(function (answer) {
 
 
   cloud().size([300, 300])
-      .words($scope.wordsAnswer.map(function(d) {
+      .words(this.wordsAnswer.map(function(d) {
         return {text: d, size: 10 + Math.random() * 50};
       }))
       .rotate(function() { return ~~(Math.random() * 2) * 90; })

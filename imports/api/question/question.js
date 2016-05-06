@@ -1,5 +1,5 @@
 import { Mongo } from 'meteor/mongo';
-import { Answer } from '../../api/answer/answer.js';
+//import { Answer } from '../../api/answer/answer.js';
 
 //export const Question = new Mongo.Collection('question');
 
