@@ -4,7 +4,10 @@ import { User } from '../../api/user/user.js';
 
 //export const Answer = new Mongo.Collection('answer');
 
-export const Answer = new Mongo.Collection('answer', {
+export const Answer = new Mongo.Collection('answer');
+
+/*
+, {
   transform: function(doc) {
     doc.questionObj = Question.find({
       _id: doc.question
@@ -16,5 +19,6 @@ export const Answer = new Mongo.Collection('answer', {
     
     return doc;
   }
-});
+}
+*/
 

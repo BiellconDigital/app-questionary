@@ -6,6 +6,7 @@ import ngAnimate from 'angular-animate';
 
 import { Question } from '../../api/question/question.js';
 import { Answer } from '../../api/answer/answer.js';
+import { Tasks } from '../../api/tasks.js';
 
 import d3 from 'd3';
 import cloud from 'd3-cloud';
@@ -52,37 +53,57 @@ CuestionaryListCtrl.$inject = ["$scope", "$timeout", "ionicMaterialMotion", "ion
 const name = 'graphicQuestion';
 
 class CuestionaryListCtrl {
-  constructor($scope, $timeout, $reactive, $stateParams, ionicMaterialMotion, ionicMaterialInk) {
+  constructor($scope, $timeout, $reactive, $stateParams, $meteor, ionicMaterialMotion, ionicMaterialInk) {
     'ngInject';
 
     ionicMaterialInk.displayEffect();
 
     let reactiveContext = $reactive(this).attach($scope);
 
-//    $scope.viewModel(this);
+    $scope.viewModel(this);
  
-  var fill = d3.scale.category20();
+    var fill = d3.scale.category20();
 
 //Tracker.autorun(function () {
     reactiveContext.helpers({
       answers: function() {
         return Answer.find({question: "1"});
+      },
+      taskss: function() {
+        return Tasks.find({});
       }
     });
 
-  this.wordsAnswer = [".NET", "Silverlight", "jQuery", "CSS3", "HTML5", "JavaScript", "SQL","C#"];
+    // this.helpers({
+    //   taskss() {
+    //     return Tasks.find({});
+    //   }
+    // });
 
-  this.autorun(() => {
-    console.log(Answer.find({question: "1"}));
-  });
+
+  $scope.wordsAnswer = [];//[".NET", "Silverlight", "jQuery", "CSS3", "HTML5", "JavaScript", "SQL","C#"];
+   this.autorun(() => {
+     console.log($scope.wordsAnswer);
+   });
  
 
     // $timeout(function() {
     //   this.wordsAnswer.push("lili");
     // }, 2200);
+  //this.arrayAnswer = Answer.find({question: "1"}).toArray()[3];
+  $scope.question = "1";
+  // $scope.stickyTodos = $meteor.collection(function(){
+  //   return Answer.find({question: $scope.getReactively('question')});
+  // });
+
+var answersResult = Answer.find({question: $scope.getReactively('question')});
+answersResult.forEach(function (answer) {
+  console.log(answer.text);
+  $scope.wordsAnswer.push(answer.text);
+});
+
 
 //  this.arrayAnswer = Answer.find();
-//  this.wordsAnswer = arrayAnswer[3];
 
 // while ( this.arrayAnswer.hasNext() ) {
 //     race = this.arrayAnswer.next();
@@ -99,7 +120,7 @@ class CuestionaryListCtrl {
 
 
   cloud().size([300, 300])
-      .words(this.wordsAnswer.map(function(d) {
+      .words($scope.wordsAnswer.map(function(d) {
         return {text: d, size: 10 + Math.random() * 50};
       }))
       .rotate(function() { return ~~(Math.random() * 2) * 90; })
