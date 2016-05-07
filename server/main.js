@@ -16,8 +16,13 @@ import { Tasks } from '../imports/api/tasks.js';
 	console.log(userId);
 	//return user;
 });
+
+Question.remove({});
+Answer.remove({});
+User.remove({});
+
 */
-//Question.remove({});
+
 
 Meteor.startup(() => {
  if (Question.find().count() === 0) {

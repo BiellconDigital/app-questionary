@@ -40,7 +40,7 @@ function Init ($scope, $rootScope, $timeout, $reactive, ionicMaterialMotion, ion
       //Meteor.subscribe('saveUser', $rootScope.currentUser);
       console.log($rootScope.currentUser);
       console.log("finalizando insercion");
-//      localStorage['user'] = JSON.stringify($rootScope.currentUser);
+      localStorage['user'] = JSON.stringify($rootScope.currentUser);
   } else {
       $rootScope.currentUser = JSON.parse(localStorage['user']);
       console.log("usuario registrado");
