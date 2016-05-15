@@ -8,18 +8,20 @@
 	<link href="/css/main.css" rel="stylesheet">
 
   <base href="/">
-  <title>App</title>
+  <title>Encuesta - Conferencia Inciativa por los Jóvenes</title>
 </head>
-<body>
-    <ion-nav-bar class="bar-dark" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left"
-      style="background-color:black;">
+<body class="skyblue-bg">
 
+  <ion-nav-bar class="barPrin" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="center">
 
-        <ion-nav-buttons side="left">
-            <div class="avatar" style="background-image: url('img/daenerys.jpg');"></div>
-        </ion-nav-buttons>
+    <ion-nav-buttons side="left">
+        <img ng-src="/img/log-nestle-jovenes.png" class="" />
+    </ion-nav-buttons>
 
-    </ion-nav-bar>
+    <ion-nav-buttons side="right" >
+      <img ng-src="/img/logo-alianza-pacifico.png" class="imgRight"/>
+    </ion-nav-buttons>
+  </ion-nav-bar>
 
   <init></init>
 

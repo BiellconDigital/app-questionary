@@ -1,16 +1,5 @@
-.fondoStandar {
-    background-color: #9a4bc1 !important;
-}
-
-.footerStandar {
-    background-color: black;
-    opacity: 0.3;
-}
-.footerStandar a {
-    font-size: 1.3em;
-    color: white !important;
-    text-decoration: none;
-    opacity: 1;
+body {
+  font-family: Helvetica !important;
 }
 /* General
 ==================================*/
@@ -84,7 +73,7 @@ h1 {
 }
 
 .content-welcome {
-    background: url('../img/profile-bg.jpg') no-repeat center center fixed !important;
+    background: url('/img/profile-bg.jpg') no-repeat center center fixed !important;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover !important;
@@ -101,5 +90,352 @@ h1 {
   display: table-cell !important;
   vertical-align: middle !important;
   text-align: center !important;
+}
+
+
+
+
+.img-responsive {
+  width: 100%;
+  height: auto;
+}
+
+.fondoStandar {
+    background-color: #9a4bc1 !important;
+}
+
+.footerStandar {
+    height: 5.3em !important;
+}
+
+.footerStandar a {
+    font-size: 2em;
+    color: white !important;
+    text-decoration: none;
+    opacity: 1;
+    height: 5.3em !important;
+    padding-top: 1.4em;
+}
+
+.footerStandar .button {
+  width: auto !important;
+  max-width: 100% !important;
+  font-weight: bold !important;
+  text-transform: initial !important;
+}
+
+.next-button {
+  content: url('/img/next-button.png');
+  width: 31px;
+}
+
+.white-bg {
+  background-color: white !important;
+}
+.blue-light-bg {
+  background-color: rgb(47,136,224) !important;
+}
+.blue-light-color {
+  color: rgb(47,136,224) !important;
+}
+
+.skyblue-bg {
+  background-color: rgb(82,201,255) !important;
+}
+.skyblue-color {
+  color: rgb(82,201,255) !important;
+}
+
+.skyblue-dark-bg {
+  background-color: rgb(47,169,224) !important;
+}
+.skyblue-dark-color {
+  color: rgb(47,169,224) !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.barPrin {
+  height: 3.1em !important;
+  padding: 0.4em;
+}
+
+.barPrin img {
+  height: 2.3em !important;
+}
+
+.barPrin .buttons-right {
+  right: 0.6em !important;
+  top: 0.4em !important;
+}
+
+.question-title {
+  height: 14em !important;
+  margin: 0 1em;
+  padding-top: 0.6em;
+  width: auto;
+}
+.question-title .content {
+  height: 9em;
+  border: 1px solid white;
+  border-radius: 3px;
+  font-size: 1.1em;
+  margin: 0.9em;
+  text-align: justify;
+  padding:1em;
+  width: auto;
+}
+
+.question-content-select {
+  height: 4.4em !important;
+  margin-bottom: 0.3em;
+}
+
+.help-question-select {
+  background-color: white;
+}
+
+.help-question-select h5 {
+  color: rgb(47,169,224) !important;
+  line-height: 3.4em;
+  font-size: 1.2em
+}
+
+.question-content-input {
+  height: 4.4em !important;
+  margin-bottom: 0.3em;
+}
+
+.help-question-input {
+  height: 4em !important;
+  background-color: rgb(82,201,255) !important;
+}
+
+.help-question-input h5 {
+  color: white;
+  font-size: 1.3em;
+  padding-top: .4em;
+  margin-left: 5.5em;
+  margin-right: 5.5em;
+}
+
+.list-options div a {
+  text-align: center !important;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.list-options div a div {
+  padding-left: 3.5em;
+  padding-right: 2.5em;
+}
+
+
+.item-md-label input {
+  background-color: white;
+  border-radius: 0.8em;
+  padding: 0.3em;
+  height: 3em;
+  color: black !important;
+}
+
+.item-md-label .input-label {
+  color: rgb(47,169,224) !important;
+  padding-left: 0.4em;
+}
+
+
+.list .item-radio input:checked ~ .item-content {
+  background-color: rgb(47,169,224) !important;
+  color: white !important;
+  font-size: 1.3em;
+}
+.list .item-radio .item-content    {
+  background-color: white;
+  color: rgb(47,169,224) !important;
+  font-size: 1.3em;
+  text-align: center;
+}
+
+.list .item-radio .radio-icon    {
+  color: white;
+}
+
+
+@media screen and (min-width:800px) {
+  .barPrin {
+    height: 3.6em !important;
+    padding: 0.5em;
+  }
+
+  .barPrin img {
+    height: 2.6em !important;
+  }
+
+  .barPrin .buttons-right {
+    right: 0.8em !important;
+    top: 0.6em !important;
+  }
+
+  .panelTitleGraphic {
+    padding: 0 1em;
+  }
+  .panelTitleGraphic .item{
+    padding: 0.5em 1em !important;
+    padding-bottom: 0.9em !important;
+  }
+  .panelTitleGraphic h3 {
+    font-size: 1.1em;
+  }
+  .panelTitleGraphic h2 {
+    font-size: 1.5em;
+  }
+
+}
+
+
+
+
+/* GRAFICOS
+==================================*/
+
+
+#vis {
+  overflow: hidden;
+  position: relative;
+}
+
+#status {
+  padding:0 0 20px 20px;
+}
+
+#controls {
+  padding: 20px;
+  background-color: #eee;
+  margin: 10px;
+  width: 350px;
+}
+
+#bubble-background {
+  fill: none;
+  pointer-events: all;
+}
+
+.bubble-node {
+  /* fill: #d1e0f3; */
+  fill: #DCE9BE;
+}
+
+.bubble-hover {
+  /* fill: #b8c7d9; */
+  fill: #E8E9E7;
+}
+
+.bubble-selected {
+  /* fill: #a8c8ee;  */
+  fill: #CEE98F;
+  /* stroke: #6081a3; */
+  stroke: #A6BA92;
+  stroke-width: 1.5px;
+}
+
+.active {
+  color: #A6BA92
+}
+
+a.bubble-label {
+  font-family: georgia, "times new roman", times, serif;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  line-height: 1em;
+  position: absolute;
+}
+
+
+.bubble-label .bubble-label-value {
+  font: 11px sans-serif;
+  white-space: nowrap;
+}
+
+
+
+
+
+
+
+
+.barGraphic {
+  fill: steelblue;
+}
+
+.barGraphic:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 11px sans-serif;
+  color: blue !important;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+
+.chart-legend li span{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+#graph-legend li span {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    font-weight: bold;
 }
 

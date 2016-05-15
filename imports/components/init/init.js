@@ -4,7 +4,14 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import { name as cuestionary } from '../cuestionary/cuestionary';
 import { name as welcome } from '../welcome/welcome';
-import { name as graphicQuestion } from '../graphics/graphicQuestion';
+import { name as completed } from '../completed/completed';
+//import { name as graphicQuestion } from '../graphics/graphicQuestion';
+import { name as graphicQuestion1 } from '../graphics/graphicQuestion1';
+import { name as graphicQuestion2 } from '../graphics/graphicQuestion2';
+import { name as graphicQuestion3 } from '../graphics/graphicQuestion3';
+import { name as graphicQuestion4 } from '../graphics/graphicQuestion4';
+import { name as graphicQuestion5 } from '../graphics/graphicQuestion5';
+import { name as graphicQuestion6 } from '../graphics/graphicQuestion6';
 import ngSanitize from 'angular-sanitize';
 import uiRouter from 'angular-ui-router';
 import ngAnimate from 'angular-animate';
@@ -47,6 +54,87 @@ function Init ($scope, $rootScope, $timeout, $reactive, ionicMaterialMotion, ion
 //      console.log(localStorage['user']);
   }
 
+    $scope.isExpanded = false;
+    $scope.hasHeaderFabLeft = false;
+    $scope.hasHeaderFabRight = false;
+
+/*    var navIcons = document.getElementsByClassName('ion-navicon');
+    for (var i = 0; i < navIcons.length; i++) {
+        navIcons.addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+    }
+
+*/   
+ ////////////////////////////////////////
+    // Layout Methods
+    ////////////////////////////////////////
+
+    $scope.hideNavBar = function() {
+        document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
+    };
+
+    $scope.showNavBar = function() {
+        document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
+    };
+
+    $scope.noHeader = function() {
+        var content = document.getElementsByTagName('ion-content');
+        for (var i = 0; i < content.length; i++) {
+            if (content[i].classList.contains('has-header')) {
+                content[i].classList.toggle('has-header');
+            }
+        }
+    };
+
+    $scope.setExpanded = function(bool) {
+        $scope.isExpanded = bool;
+    };
+
+    $scope.setHeaderFab = function(location) {
+        var hasHeaderFabLeft = false;
+        var hasHeaderFabRight = false;
+
+        switch (location) {
+            case 'left':
+                hasHeaderFabLeft = true;
+                break;
+            case 'right':
+                hasHeaderFabRight = true;
+                break;
+        }
+
+        $scope.hasHeaderFabLeft = hasHeaderFabLeft;
+        $scope.hasHeaderFabRight = hasHeaderFabRight;
+    };
+
+    $scope.hasHeader = function() {
+        var content = document.getElementsByTagName('ion-content');
+        for (var i = 0; i < content.length; i++) {
+            if (!content[i].classList.contains('has-header')) {
+                content[i].classList.toggle('has-header');
+            }
+        }
+
+    };
+
+    $scope.hideHeader = function() {
+        $scope.hideNavBar();
+        $scope.noHeader();
+    };
+
+    $scope.showHeader = function() {
+        $scope.showNavBar();
+        $scope.hasHeader();
+    };
+
+    $scope.clearFabs = function() {
+        var fabs = document.getElementsByClassName('button-fab');
+        if (fabs.length && fabs.length > 1) {
+            fabs[0].remove();
+        }
+    };
+
 
     // Set Header
 //    $scope.showHeader();
@@ -79,9 +167,16 @@ export default angular.module(name, [
   'ionic',
   'ionic-material',
   'ionMdInput',
+//  'angularD3LiquidFillGauge',
   welcome,
   cuestionary,
-  graphicQuestion
+  graphicQuestion1,
+  graphicQuestion2,
+  graphicQuestion3,
+  graphicQuestion4,
+  graphicQuestion5,
+  graphicQuestion6,
+  completed
 ])
 .component(name, {
   templateUrl: 'imports/components/init/web.html',

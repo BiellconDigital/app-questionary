@@ -1,0 +1,31 @@
+<ion-view>
+    <ion-content ng-class="{expanded:isExpanded}">
+
+        <div class="list animate-fade-slide-in-right skyblue-dark-bg panelTitleGraphic">
+        	<div class="item item-text-wrap">
+			    <h3 class="skyblue-color text-center">
+			        Después de este evento:
+			    </h3>
+				<h2 class="light text-center" ng-bind="graphicQuestion1.question.descripcion"></h2>
+        	</div>
+        </div>
+
+        <div class="slide-up">
+            <div class="content" style="text-align:center;">
+
+                <bubble-cloud
+                    diameter="460"
+                    watch="true"
+                    data="net_worth"
+                    value-attr="balance"
+                    label-attr="name"
+                    fill-color-fn="fill_color"
+                    label-color-fn="label_color"
+                ></bubble-cloud>
+
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>

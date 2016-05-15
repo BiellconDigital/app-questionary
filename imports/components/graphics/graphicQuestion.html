@@ -1,19 +1,28 @@
-         <div class="content">
-            <div class="contentGraphic">
 
-            </div>
+     <div class="content">
+        <div class="contentGraphic">
+
         </div>
+    </div>
 
+<div id="barQ"></div> 
+
+
+<div id="vis"></div> 
+
+
+<div ng-init="init(78)">
+    <burble id='fd1' value='{{value}}' ng-model='config'></burble>
+</div>
+
+<!--     
+<div ng-init="init(78)">
+    <burble id='fd1' value='{{value}}' ng-model='config'></burble>
+</div>
 
 <ul>
-  <li ng-repeat="task in graphicQuestion.taskss">
-    {{task.text}}
-  </li>
-</ul>
-
-<ul>
-  <li ng-repeat="task in graphicQuestion.answers">
-    {{task.text}}
-  </li>
-</ul>
-
+      <li ng-repeat="task in graphicQuestion.answers">
+        {{task.text}}
+      </li>
+    </ul>
+ -->
