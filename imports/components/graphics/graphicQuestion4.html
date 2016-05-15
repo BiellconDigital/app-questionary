@@ -1,0 +1,25 @@
+<ion-view>
+    <ion-content ng-class="{expanded:isExpanded}">
+
+        <div class="list animate-fade-slide-in-right skyblue-dark-bg panelTitleGraphic">
+        	<div class="item item-text-wrap">
+			    <h3 class="skyblue-color text-center">
+			        Después de este evento:
+			    </h3>
+				<h2 class="light text-center" ng-bind="graphicQuestion4.question.descripcion"></h2>
+        	</div>
+        </div>
+
+        <div class="slide-up">
+            <div class="content" style="text-align:center;">
+                <div id="graph-legend" class="chart-legend"></div>
+                <canvas id="chartQ4" class="mychart" height="416" width="1200"></canvas>
+<!-- 			    <burble id='fd1' value='{{value}}' ng-model='config' height= "250" width="250"></burble>
+<div ng-bind="value"></div>
+ -->			    
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>

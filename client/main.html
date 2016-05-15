@@ -1,29 +1,29 @@
 <head>
-  <title>simple</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/ion-md-input/css/ion-md-input.css" rel="stylesheet">
+	<link href="/css/main.css" rel="stylesheet">
+
+  <base href="/">
+  <title>Encuesta - Conferencia Inciativa por los Jóvenes</title>
 </head>
+<body class="skyblue-bg">
 
-<body>
-  <h1>Welcome to Meteor!</h1>
+  <ion-nav-bar class="barPrin" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="center">
 
-  {{> hello}}
-  {{> chart}}
+    <ion-nav-buttons side="left">
+        <img ng-src="/img/log-nestle-jovenes.png" class="" />
+    </ion-nav-buttons>
 
-  {{> graph}}
+    <ion-nav-buttons side="right" >
+      <img ng-src="/img/logo-alianza-pacifico.png" class="imgRight"/>
+    </ion-nav-buttons>
+  </ion-nav-bar>
 
+  <init></init>
 
+  
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
-<template name="graph">
-  {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
-</template>
-
-<template name="chart">
-    <h2>Chart:Chart</h2>
-     <canvas id="myChart" width="400" height="400"></canvas>
-
-</template>

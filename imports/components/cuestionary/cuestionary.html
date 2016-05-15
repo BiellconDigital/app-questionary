@@ -1,0 +1,135 @@
+<ion-view class="white-bg">
+    <ion-content ng-class="{expanded:isExpanded}">
+
+        <div class="hero question-title blue-light-bg slide-up">
+            <h4 class="light" >Pregunta {{ cuestionary.questionId }}</h4>
+            <div class="content">
+                <p class="light" ng-bind="cuestionary.question.descripcion"></p>
+            </div>
+        </div>
+
+        <div class="hero question-content-select slide-up">
+            <div class="content">
+                <div ng-class="styleHelp">
+                  <h5>{{ textPanelQuestion }}</h5>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="content list-options" ng-if="cuestionary.questionId == 1">
+            <div class="list animate-fade-slide-in-right">
+               <label class="item item-radio">
+                  <input type="radio" name="group1" ng-model="cuestionary.anwserP1" ng-value="'Nada probable'">
+                  <div class="item-content">
+                     Nada probable
+                  </div>
+                  <i class="radio-icon ion-checkmark"></i>
+               </label>
+
+               <label class="item item-radio">
+                  <input type="radio" name="group1" ng-model="cuestionary.anwserP1" ng-value="'Poco probable'">
+                  <div class="item-content">
+                     Poco probable
+                  </div>
+                  <i class="radio-icon ion-checkmark"></i>
+               </label>
+
+               <label class="item item-radio">
+                  <input type="radio" name="group1" ng-model="cuestionary.anwserP1" ng-value="'Probable'">
+                  <div class="item-content">
+                     Probable
+                  </div>
+                  <i class="radio-icon ion-checkmark"></i>
+               </label>
+
+               <label class="item item-radio">
+                  <input type="radio" name="group1" ng-model="cuestionary.anwserP1" ng-value="'Muy probable'">
+                  <div class="item-content">
+                     Muy probable
+                  </div>
+                  <i class="radio-icon ion-checkmark"></i>
+               </label>
+            </div>
+        </div>
+
+        <div class="content list-options" ng-if="cuestionary.questionId == 2 || cuestionary.questionId == 5">
+            <div class="list light animate-fade-slide-in-right">
+                <div class="item">
+                    <ion-md-input placeholder="Palabras uno" 
+                        required ng-minlength="3" ng-maxlength="16" ng-trim="true" ng-pattern="[^'\s]"
+                        hightlight-color="assertive" type="text" 
+                        ng-model="cuestionary.answerText1"></ion-md-input>
+                </div>
+                <div class="item">
+                    <ion-md-input placeholder="Palabras dos"
+                        hightlight-color="assertive" type="text" 
+                        required ng-minlength="3" ng-maxlength="16" ng-trim="true" ng-pattern="[^'\s]"
+                        ng-model="cuestionary.answerText2"></ion-md-input>
+                </div>
+            </div>
+        </div>
+
+        <div class="content list-options" ng-if="cuestionary.questionId == 3 || cuestionary.questionId == 6">
+            <div class="list animate-fade-slide-in-right">
+               <label class="item item-radio">
+                  <input type="radio" name="group1" ng-model="cuestionary.anwserP3" ng-value="'Si'">
+                  <div class="item-content">
+                    <br/>
+                    Si
+                    <br/>
+                    <br/>
+                  </div>
+                  <i class="radio-icon ion-checkmark"></i>
+               </label>
+
+               <label class="item item-radio skyblue-dark-bg">
+                  <input type="radio" name="group1" ng-model="cuestionary.anwserP3" ng-value="'No'">
+                  <div class="item-content">
+                    <br/>
+                    No
+                    <br/>
+                    <br/>
+                  </div>
+                  <i class="radio-icon ion-checkmark"></i>
+               </label>
+            </div>
+        </div>
+
+        <div class="content list-options" ng-if="cuestionary.questionId == 4">
+            <div class="list light animate-fade-slide-in-right">
+               <label class="item item-radio item-text-wrap">
+                  <input type="radio" name="group1" ng-model="cuestionary.anwserP4" 
+                    ng-value="'Si, el sector privado puede ser un fuerte aliado'">
+                  <div class="item-content">
+                    <br/>
+                    Si, el sector privado puede ser un fuerte aliado
+                    <br/>
+                  </div>
+                  <i class="radio-icon ion-checkmark"></i>
+               </label>
+
+               <label class="item item-radio skyblue-dark-bg item-text-wrap">
+                  <input type="radio" name="group1" ng-model="cuestionary.anwserP4" 
+                    ng-value="'No, la responsabilidad de la educación es sólo del gobierno'">
+                  <div class="item-content">
+                    <br/>
+                    No, la responsabilidad de la educación es sólo del gobierno
+                    <br/>
+                  </div>
+                  <i class="radio-icon ion-checkmark"></i>
+               </label>
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>
+
+<div class="bar bar-footer footerStandar blue-light-bg">
+    <a class="title" av-transition="ios" ng-click="cuestionary.saveAnswerAndNext()">
+        <button class="button button-clear">
+            {{ textButtonQuestion }} <i class="icon next-button"></i>
+        </button>
+    </a>
+</div>
