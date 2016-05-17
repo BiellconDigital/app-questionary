@@ -8,13 +8,35 @@ import './cuestionary.html';
 const name = 'cuestionary';
 
 class CuestionaryListCtrl {
-  constructor($scope, $rootScope, $timeout, $reactive, $stateParams, $state, 
+  constructor($scope, $rootScope, $timeout, $reactive, $stateParams, $state, $ionicPopup,
                 ionicMaterialMotion, ionicMaterialInk) {
     'ngInject';
 
     this.questionId = $stateParams.questionId;
+//    console.log($rootScope.currentUser['q' + this.questionId])
+    if ($rootScope.currentUser['q' + this.questionId] == true) {
+      alertInputs = $ionicPopup.alert({
+          title : 'Aviso',
+          template: 'Ud. ya contestó esta pregunta.'
+      });
+      alertInputs.then(function(res) {
+        $scope.verificarEncuestaFin();
+      });
+    }
+    
+    $scope.verificarEncuestaFin = function (argument) {
+      for (var i = 1; i < 7; i++) {
+//        console.log('q' + i + ': ', $rootScope.currentUser['q' + i])
+        if ($rootScope.currentUser['q' + i] != true) {
+          $state.transitionTo('cuestionary', {questionId: i});
+        }
+      };
+      $state.transitionTo('completed');
+    }
+
     this.answerText = null;
     this.$state = $state;
+    this.$ionicPopup = $ionicPopup;
     this.$rootScope = $rootScope;
     $scope.textButtonQuestion = 'Siguiente'
     $scope.styleHelp = '';
@@ -83,7 +105,6 @@ class CuestionaryListCtrl {
 
     this.nextQuestionId = this.questionId + 1;
     $scope.viewModel(this);
-    console.log($rootScope.currentUser);
 
     this.helpers({
       question() {
@@ -93,20 +114,53 @@ class CuestionaryListCtrl {
 
   }
 
+  
   saveAnswerAndNext() {
-    console.log("valores answer:: ");
-    console.log(this.questionId);
     if (this.questionId == 1) {
+      if (this.anwserP1 === undefined || this.anwserP1 === null) {
+        alertInputs = this.$ionicPopup.alert({
+            title : 'Seleccione opción',
+            template: 'Debe seleccionar una opción para esta pregunta.'
+        });
+
+        return;
+      }
       this.answerText = this.anwserP1;
     } else if (this.questionId == 3 || this.questionId == 6) {
+      if (this.anwserP3 === undefined || this.anwserP3 === null) {
+        alertInputs = this.$ionicPopup.alert({
+            title : 'Seleccione opción',
+            template: 'Debe seleccionar una opción para esta pregunta.'
+        });
+
+        return;
+      }
       this.answerText = this.anwserP3;
     } else if (this.questionId == 4) {
+      if (this.anwserP4 === undefined || this.anwserP4 === null) {
+        alertInputs = this.$ionicPopup.alert({
+            title : 'Seleccione opción',
+            template: 'Debe seleccionar una opción para esta pregunta.'
+        });
+
+        return;
+      }
       this.answerText = this.anwserP4;
     } else {
-      this.answerText = this.answerText1 + ' ' + this.answerText2;
-    }
+      if (this.answerText1 === undefined || this.answerText1 === null) {
+        alertInputs = this.$ionicPopup.alert({
+            title : 'Ingrese una palabra',
+            template: 'Debe ingresar al menos la primera palabra para esta pregunta.'
+        });
 
-    console.log(this.answerText);
+        return;
+      }
+      if (this.answerText2 === undefined) {
+        this.answerText = this.answerText1;
+      } else {
+        this.answerText = this.answerText1 + ' ' + this.answerText2;
+      }
+    }
 
     Answer.insert({
       user: this.$rootScope.currentUser._id,
@@ -114,6 +168,9 @@ class CuestionaryListCtrl {
       text: this.answerText,
       createdAt : new Date()
     });
+
+    this.$rootScope.currentUser['q' + this.questionId] = true;
+    localStorage['user'] = JSON.stringify(this.$rootScope.currentUser);
 
     if (this.questionId <= 5) {
       this.$state.transitionTo('cuestionary', {questionId: this.nextQuestionId});

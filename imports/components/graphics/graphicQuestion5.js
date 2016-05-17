@@ -23,14 +23,6 @@ class GraphicQuestion5Ctrl {
     $scope.$parent.setExpanded(false);
 //    $scope.$parent.setHeaderFab(false);
 
-    // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up',
-            startVelocity: 500
-        });
-    }, 900);
-
     $timeout(function() {
         ionicMaterialMotion.fadeSlideInRight({
             startVelocity: 1500
@@ -43,6 +35,9 @@ class GraphicQuestion5Ctrl {
         getByQuestion() {
           return Answer.find({question: 5});
         },
+        getTotalByQuestion() {
+          return Answer.find({question: 5}).count();
+        },
         question() {
           return Question.findOne({_id: "5"});
         }
@@ -51,15 +46,15 @@ class GraphicQuestion5Ctrl {
 //    this.wordsAnswer = [];
     /************************** RENDERIZACION DEL GRAFICO ****************************/
     var fill = d3.scale.category20();
-    var w = 1000,
-    h = 450,
+    var w = jQuery(window).width() - jQuery(window).width()*0.16,
+    h = jQuery(window).height() - 165,
     words = [],
     max, scale = 1,
     svg = d3.select("div.contentGraphic").append("svg").attr("width", w).attr("height", h),
     background = svg.append("g"),
     vis = svg.append("g").attr("transform", "translate(" + [w >> 1, h >> 1] + ")"),
     layout = cloud().timeInterval(10).size([w, h])
-      .rotate(function() { return ~~(Math.random() * 2) * 70; })
+      .rotate(function() { return ~~(Math.random() * 2) * 1; })
       .font("Helvetica")
       .fontSize(function(t) { return fontSize(+t.value); }).text(function(t) {
         return t.key

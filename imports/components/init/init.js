@@ -41,7 +41,8 @@ function Init ($scope, $rootScope, $timeout, $reactive, ionicMaterialMotion, ion
       var userId = User.insert({username: 'invitado', completeCuestionary: false, createdAt : new Date()});
       $rootScope.currentUser = {
         _id: userId,
-        username: 'invitado', completeCuestionary: false, createdAt : new Date()
+        username: 'invitado', completeCuestionary: false, createdAt : new Date(),
+        q1:false, q2:false, q3:false, q4:false, q5:false, q6:false
       };
 
       //Meteor.subscribe('saveUser', $rootScope.currentUser);

@@ -25,14 +25,6 @@ class GraphicQuestion3Ctrl {
     this.totalSi = 0;
     this.totalNo = 0;
 
-    // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up',
-            startVelocity: 500
-        });
-    }, 900);
-
     $timeout(function() {
         ionicMaterialMotion.fadeSlideInRight({
             startVelocity: 1500
@@ -41,7 +33,7 @@ class GraphicQuestion3Ctrl {
 
    this.helpers({
       answers() {
-        return Answer.find({question: 3});
+        return Answer.find({question: 3}).count();
       },
       question() {
         return Question.findOne({_id: "3"});
@@ -49,10 +41,10 @@ class GraphicQuestion3Ctrl {
    });
 
     var burbleSiConfig = liquidFillGaugeDefaultSettings();
-    burbleSiConfig.circleColor = "#FF7777";
-    burbleSiConfig.textColor = "#FF4444";
-    burbleSiConfig.waveTextColor = "#FFAAAA";
-    burbleSiConfig.waveColor = "#FFDDDD";
+    burbleSiConfig.circleColor = "#0662ab";
+    burbleSiConfig.textColor = "#0662ab";
+    burbleSiConfig.waveTextColor = "#0662ab";
+    burbleSiConfig.waveColor = "#9ec6e5";
     burbleSiConfig.circleThickness = 0.1;
     burbleSiConfig.circleFillGap = 0.06;
     burbleSiConfig.textVertPosition = 0.4;
@@ -62,10 +54,10 @@ class GraphicQuestion3Ctrl {
 
     var burbleNoConfig = liquidFillGaugeDefaultSettings();
     burbleNoConfig.circleThickness = 0.1;
-    burbleNoConfig.circleColor = "#808015";
-    burbleNoConfig.textColor = "#555500";
-    burbleNoConfig.waveTextColor = "#FFFFAA";
-    burbleNoConfig.waveColor = "#AAAA39";
+    burbleNoConfig.circleColor = "#e41129";
+    burbleNoConfig.textColor = "#e41129";
+    burbleNoConfig.waveTextColor = "#e41129";
+    burbleNoConfig.waveColor = "#ffb2ba";
     burbleNoConfig.textVertPosition = 0.4;
     burbleNoConfig.waveAnimateTime = 1000;
     burbleNoConfig.waveHeight = 0.03
@@ -200,12 +192,13 @@ function loadLiquidFillGauge(elementId, value, valueNumber, config) {
 
     var gauge = d3.select("#" + elementId);
     var svgFooter = d3.select("." + elementId);
-    var heightSvgFooter = 50;//parseInt(svgFooter.style("height"));
+    var textLabel = elementId == 'burbleNo' ? 'NO' : 'SI';
+    var heightSvgFooter = 65;//parseInt(svgFooter.style("height"));
     var widthGauge = parseInt(gauge.style("width"));
-
-    var radius = Math.min(parseInt(gauge.style("width")), parseInt(gauge.style("height")))/2;
+    var heightG = jQuery(window).height() - 150 - jQuery(window).height()*0.20;
+    var radius = Math.min(parseInt(gauge.style("width")), heightG)/2;
     var locationX = parseInt(gauge.style("width"))/2 - radius;
-    var locationY = parseInt(gauge.style("height"))/2 - radius;
+    var locationY = heightG/2 - radius;
     var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value))/config.maxValue;
 
     var waveHeightScale;
@@ -306,7 +299,7 @@ function loadLiquidFillGauge(elementId, value, valueNumber, config) {
         .text(textStartValueNumber)//textRounder(textStartValue) + percentText
         .attr("class", "liquidFillGaugeText")
         .attr("text-anchor", "middle")
-        .attr("font-size", Math.round(textPixels/1.6) + "px")
+        .attr("font-size", Math.round(textPixels/1.9) + "px")
         .style("fill", config.textColor)
 //        .attr("dy", "1em")
         .attr('transform','translate(' + widthGauge / 2 + ','+ (heightSvgFooter) +')');
@@ -351,7 +344,7 @@ function loadLiquidFillGauge(elementId, value, valueNumber, config) {
         };
         var textTweenNumber = function(){
             var i = d3.interpolate(this.textContent, textFinalValueNumber);
-            return function(t) { this.textContent = textRounder(i(t)); }
+            return function(t) { this.textContent = textLabel + ': ' + textRounder(i(t)); }
         };
         text1.transition()
             .duration(config.waveRiseTime)
@@ -408,7 +401,7 @@ function loadLiquidFillGauge(elementId, value, valueNumber, config) {
             };
             var textTweenNumber = function(){
                 var i = d3.interpolate(this.textContent, parseFloat(valueNumber).toFixed(2));
-                return function(t) { this.textContent = textRounderUpdater(i(t)); }
+                return function(t) { this.textContent = textLabel + ': ' + textRounderUpdater(i(t)); }
             };
 
             text1.transition()

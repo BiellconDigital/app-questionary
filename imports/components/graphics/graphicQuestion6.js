@@ -25,14 +25,6 @@ class GraphicQuestion6Ctrl {
     $scope.$parent.setExpanded(false);
 //    $scope.$parent.setHeaderFab(false);
 
-    // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up',
-            startVelocity: 500
-        });
-    }, 900);
-
     $timeout(function() {
         ionicMaterialMotion.fadeSlideInRight({
             startVelocity: 1500
@@ -41,7 +33,7 @@ class GraphicQuestion6Ctrl {
 
    this.helpers({
       answers() {
-        return Answer.find({question: 6});
+        return Answer.find({question: 6}).count();
       },
       question() {
         return Question.findOne({_id: "6"});
@@ -79,12 +71,15 @@ class GraphicQuestion6Ctrl {
 
         showTooltips: false,
 
+        responsive: true,
+
         onAnimationComplete: function () {
 
           this.chart.ctx.fillStyle = 'black';
           this.chart.ctx.textBaseline = 'middle';
           this.chart.ctx.textAlign = 'start';
-          this.chart.ctx.font="2em Helvetica";
+          this.chart.ctx.font='bold ' 
+                    +  (jQuery(window).width() > 1300 ? '3.5': '2') + 'em Helvetica';
           if (this.segments.length > 0) {
 
             var total = 0;
@@ -92,7 +87,7 @@ class GraphicQuestion6Ctrl {
               total += this.segments[i].value;      
             }
 
-            this.chart.ctx.fillText('Total: ' + total , this.chart.width / 2 - 90, this.chart.height / 2, 100);
+//            this.chart.ctx.fillText('Total: ' + total , this.chart.width / 2 - 90, this.chart.height / 2, 100);
 
             for(var i = 0; i < this.segments.length; i++) {
               var percentage = ((this.segments[i].value / total) * 100).toFixed(1);
@@ -104,7 +99,9 @@ class GraphicQuestion6Ctrl {
                   this.chart.ctx.textAlign = 'center';
                   this.chart.ctx.textBaseline = 'middle';
                   this.chart.ctx.fillStyle = '#fff';
-                  this.chart.ctx.font = 'bold 1.4em Helvetica';
+
+                  this.chart.ctx.font = 'bold ' 
+                    +  (jQuery(window).width() > 1350 ? '2.1': '1.4') + 'em Helvetica';
                   this.chart.ctx.fillText(percentage + '% (' +  this.segments[i].value + ')', x-13, y);
               }
             }
@@ -123,13 +120,13 @@ class GraphicQuestion6Ctrl {
     var data = [
         {
             value: 1,
-            color:"#27AE60",
+            color:"#0662ab",
             highlight: "#2ECC71",
             label: "Si"
         },
         {
             value: 1,
-            color: "#16A085",
+            color: "#e41129",
             highlight: "#1ABC9C",
             label: "No"
         }

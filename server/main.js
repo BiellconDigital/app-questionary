@@ -5,11 +5,19 @@ import { Answer } from '../imports/api/answer/answer.js';
 import { User } from '../imports/api/user/user.js';
 import { Tasks } from '../imports/api/tasks.js';
 
-
 /*Meteor.publish("chart1", function () {
     return Tasks.find({},{value:1,itemname:1,_id:0});
 });
+Question.remove({_id: "3"});
+Question.insert({
+	_id: "3",
+	descripcion: '¿Creen que la educación dual (aprender trabajando) debería implementarse a mayor velocidad en los países de la Alianza del Pacífico como lo es en Europa?',
+	detalle: ''
+});
+
+
 */
+
 
 /*Meteor.publish("saveUser", function (user) {
 	var userId = User.insert(user);
@@ -39,7 +47,7 @@ Meteor.startup(() => {
 	
 	Question.insert({
 		_id: "3",
-		descripcion: '¿Creen que el concepto de educación dual (aprender trabajando) es una solución válida para afrontar el desempleo como lo es en Europa?',
+		descripcion: '¿Creen que la educación dual (aprender trabajando) debería implementarse a mayor velocidad en los países de la Alianza del Pacífico como lo es en Europa?',
 		detalle: ''
 	});
 	
@@ -74,7 +82,7 @@ Meteor.startup(() => {
 // 	Meteor.call('eval.ip');
 
 Meteor.onConnection(function (connection) {
-	console.log("clientAddress: ");
-	console.log(connection.clientAddress);
+//	console.log("clientAddress: ");
+//	console.log(connection.clientAddress);
   // Check if connected client has their IP banned
 })

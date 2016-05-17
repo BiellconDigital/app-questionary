@@ -30,7 +30,9 @@ class GraphicQuestion1Ctrl {
     }, 100);
 
 */
-    // Set Motion
+    $scope.diameter = jQuery(window).height() - jQuery(window).height()*0.3;
+//    console.log('diametro: ', $scope.diameter)
+/*    // Set Motion
     $timeout(function() {
         ionicMaterialMotion.slideUp({
             selector: '.slide-up',
@@ -38,7 +40,7 @@ class GraphicQuestion1Ctrl {
         });
     }, 900);
 
-    $timeout(function() {
+*/    $timeout(function() {
         ionicMaterialMotion.fadeSlideInRight({
             startVelocity: 1500
         });
@@ -54,25 +56,25 @@ $scope.fill_color = function (group) {
   var fillColor = '';
   switch (group) {
       case 'Nada probable':
-          fillColor = "blue";
+          fillColor = "#5EA099";
           break;
       case 'Poco probable':
-          fillColor = "green";
+          fillColor = "#1367B5";
           break;
       case 'Probable':
-          fillColor = "yellow";
+          fillColor = "#70A73A";
           break;
       case 'Muy probable':
-          fillColor = "pink";
+          fillColor = "#75AADB";
           break;
       default:
-          fillColor = "black";
+          fillColor = "white";
   }
   return fillColor;
 }
 
 $scope.label_color = function (group) {
-    return group === 'assets' ? 'black' : '#8c8c8c';
+    return group === 'assets' ? 'black' : 'white';
 }
 
 
@@ -81,6 +83,9 @@ $scope.label_color = function (group) {
     // });
 
    this.helpers({
+    answersTotal: function() {
+      return Answer.find({question: 1}).count();
+    },
     answersTotalNadaProbable: function() {
       return Answer.find({question: 1, text: 'Nada probable'}).count();
     },
@@ -105,10 +110,10 @@ $scope.label_color = function (group) {
         && this.getReactively('answersTotalNadaProbable') !== undefined ) {
 
         tieneElementos = true;
-        console.log(this.getReactively('answersTotalNadaProbable'));
         wordsAnswerResult['Nada probable'] = [{
           name: 'Nada probable',
-          balance: this.getReactively('answersTotalNadaProbable')
+          balance: this.getReactively('answersTotalNadaProbable'),
+          total: this.getReactively('answersTotal')
         }];
       }
 
@@ -116,10 +121,10 @@ $scope.label_color = function (group) {
         && this.getReactively('answersTotalPocoProbable') !== undefined ) {
 
         tieneElementos = true;
-        console.log(this.getReactively('answersTotalPocoProbable'));
         wordsAnswerResult['Poco probable'] = [{
           name: 'Poco probable',
-          balance: this.getReactively('answersTotalPocoProbable')
+          balance: this.getReactively('answersTotalPocoProbable'),
+          total: this.getReactively('answersTotal')
         }];
       }
 
@@ -127,10 +132,10 @@ $scope.label_color = function (group) {
         && this.getReactively('answersTotalProbable') !== undefined ) {
 
         tieneElementos = true;
-        console.log(this.getReactively('answersTotalProbable'));
         wordsAnswerResult['Probable'] = [{
           name: 'Probable',
-          balance: this.getReactively('answersTotalProbable')
+          balance: this.getReactively('answersTotalProbable'),
+          total: this.getReactively('answersTotal')
         }];
       }
 
@@ -138,15 +143,15 @@ $scope.label_color = function (group) {
         && this.getReactively('answersTotalMuyProbable') !== undefined ) {
 
         tieneElementos = true;
-        console.log(this.getReactively('answersTotalMuyProbable'));
         wordsAnswerResult['Muy probable'] = [{
           name: 'Muy probable',
-          balance: this.getReactively('answersTotalMuyProbable')
+          balance: this.getReactively('answersTotalMuyProbable'),
+          total: this.getReactively('answersTotal')
         }];
       }
 
       if (tieneElementos) {
-        console.log('resultado a renderizar: ', wordsAnswerResult)
+//        console.log('resultado a renderizar: ', wordsAnswerResult)
         $scope.net_worth = wordsAnswerResult;
       }
 
@@ -203,43 +208,6 @@ $scope.label_color = function (group) {
 */
 //      }
 //    });
-
-    this.wordsAnswer = [];//[".NET", "Silverlight", "jQuery", "CSS3", "HTML5", "JavaScript", "SQL","C#"];
-   
-//    this.answersResult = Answer.find({question: "1"});
-
-     //console.log(this.answers)
-      // $timeout(function() {
-      //   this.wordsAnswer.push("lili");
-      // }, 2200);
-    //this.arrayAnswer = Answer.find({question: "1"}).toArray()[3];
-    $scope.question = "1";
-
-/************* ACTUALIZACION REAL TIME DE GRAFICOS ***************/
-    this.autorun(() => {
-//      console.log(this.getReactively('answerByGroupCount'));
-
-/*      if (this.getReactively('answerByGroupCount').length > 0) {
-        var wordsAnswerResult = [];
-        var idInc = 1;
-        this.getReactively('answerByGroupCount').forEach(function (answer) {
-          wordsAnswerResult.push({
-            id: idInc,
-            name: answer._id,
-            count: answer.count
-          });
-          idInc = idInc + 1;
-        });
-        this.wordsAnswer = wordsAnswerResult;
-        console.log("finalizo ", this.wordsAnswer);
-        display(this.wordsAnswer);
-      }
-*/
-    });
-
-
-
-
 
   }
 }

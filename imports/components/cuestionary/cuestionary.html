@@ -1,11 +1,13 @@
 <ion-view class="white-bg">
-    <ion-content ng-class="{expanded:isExpanded}">
+    <ion-content ng-class="{expanded:isExpanded}" style="margin-bottom:4.5em;">
 
-        <div class="hero question-title blue-light-bg slide-up">
+        <div class="hero question-title slide-up">
+          <div class="question-title-panel blue-light-bg">
             <h4 class="light" >Pregunta {{ cuestionary.questionId }}</h4>
             <div class="content">
                 <p class="light" ng-bind="cuestionary.question.descripcion"></p>
             </div>
+          </div>
         </div>
 
         <div class="hero question-content-select slide-up">
@@ -53,31 +55,31 @@
             </div>
         </div>
 
-        <div class="content list-options" ng-if="cuestionary.questionId == 2 || cuestionary.questionId == 5">
-            <div class="list light animate-fade-slide-in-right">
-                <div class="item">
-                    <ion-md-input placeholder="Palabras uno" 
-                        required ng-minlength="3" ng-maxlength="16" ng-trim="true" ng-pattern="[^'\s]"
-                        hightlight-color="assertive" type="text" 
-                        ng-model="cuestionary.answerText1"></ion-md-input>
-                </div>
-                <div class="item">
-                    <ion-md-input placeholder="Palabras dos"
-                        hightlight-color="assertive" type="text" 
-                        required ng-minlength="3" ng-maxlength="16" ng-trim="true" ng-pattern="[^'\s]"
-                        ng-model="cuestionary.answerText2"></ion-md-input>
-                </div>
+        <div class="list-options" style="width:92%;"
+          ng-if="cuestionary.questionId == 2 || cuestionary.questionId == 5">
+            <div class="list animate-fade-slide-in-right" >
+
+  <label class="item item-input" style="margin:1.3em;">
+    <input type="text" placeholder="Palabra uno"
+      required ng-minlength="3" ng-maxlength="16" ng-trim="true"
+      ng-model="cuestionary.answerText1">
+  </label>
+  <label class="item item-input" style="margin:1.3em;">
+    <input type="text" placeholder="Palabra dos"
+      ng-minlength="3" ng-maxlength="16" ng-trim="true" 
+      ng-model="cuestionary.answerText2"
+    >
+  </label>
+
             </div>
         </div>
 
         <div class="content list-options" ng-if="cuestionary.questionId == 3 || cuestionary.questionId == 6">
             <div class="list animate-fade-slide-in-right">
-               <label class="item item-radio">
+               <label class="item item-radio" >
                   <input type="radio" name="group1" ng-model="cuestionary.anwserP3" ng-value="'Si'">
-                  <div class="item-content">
-                    <br/>
+                  <div class="item-content" style="padding-top:1.4em;padding-bottom:1.4em;">
                     Si
-                    <br/>
                     <br/>
                   </div>
                   <i class="radio-icon ion-checkmark"></i>
@@ -85,10 +87,8 @@
 
                <label class="item item-radio skyblue-dark-bg">
                   <input type="radio" name="group1" ng-model="cuestionary.anwserP3" ng-value="'No'">
-                  <div class="item-content">
-                    <br/>
+                  <div class="item-content" style="padding-top:1.4em;padding-bottom:1.4em;">
                     No
-                    <br/>
                     <br/>
                   </div>
                   <i class="radio-icon ion-checkmark"></i>
@@ -101,10 +101,8 @@
                <label class="item item-radio item-text-wrap">
                   <input type="radio" name="group1" ng-model="cuestionary.anwserP4" 
                     ng-value="'Si, el sector privado puede ser un fuerte aliado'">
-                  <div class="item-content">
-                    <br/>
+                  <div class="item-content" style="padding-top:1.2em;padding-bottom:1.2em;">
                     Si, el sector privado puede ser un fuerte aliado
-                    <br/>
                   </div>
                   <i class="radio-icon ion-checkmark"></i>
                </label>
@@ -112,10 +110,8 @@
                <label class="item item-radio skyblue-dark-bg item-text-wrap">
                   <input type="radio" name="group1" ng-model="cuestionary.anwserP4" 
                     ng-value="'No, la responsabilidad de la educación es sólo del gobierno'">
-                  <div class="item-content">
-                    <br/>
+                  <div class="item-content" style="padding-top:1.2em;padding-bottom:1.2em;">
                     No, la responsabilidad de la educación es sólo del gobierno
-                    <br/>
                   </div>
                   <i class="radio-icon ion-checkmark"></i>
                </label>

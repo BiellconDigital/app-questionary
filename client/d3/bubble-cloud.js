@@ -19,7 +19,7 @@ angular.module('bubbleCloud', [])
             valueAttr: '@',
 
             // The attribute containing a data object's label (optional)
-            labelAttr: '@',
+            totalAttr: '@',
 
             // The attribute containing a data object's label (optional)
             labelAttr: '@',
@@ -181,18 +181,17 @@ angular.module('bubbleCloud', [])
 
         enter.append("text")
             .attr('dy', '.3em')
+            .attr('class', 'text1')
             .style('text-anchor', 'middle')
+            .style('font-weight', 'bold')
+        enter.append("text")
+            .attr('class', 'text2')
+            .style('text-anchor', 'middle')
+            .style('font-weight', 'bold')
 
-/*        enter.append("text")
-            .attr('dy', '1.4em')
-            .style('text-anchor', 'middle')
-            .text(function (datum) {
-                return d3.format(',d')(datum.object[valueAttr]);
-            });
-*/
         // Handle each node
-
         var valueAttr = $scope.valueAttr;
+        var totalAttr = $scope.totalAttr;
         var labelAttr = $scope.labelAttr;
         var label_format_fn = $scope.label_format_fn;
         var fill_color_fn = $scope.fill_color_fn;
@@ -220,14 +219,35 @@ angular.module('bubbleCloud', [])
                 return fill_color_fn(datum.group);
             });
 
-        node.select("text")
+        node.select(".text1")
             .style('fill', function (datum) {
                 return label_color_fn(datum.group);
             })
+            .style("font-size", function (datum) {
+                return (datum.r/3.8) + "px";
+            })
             .text(function (datum) {
                 var label = datum.object[labelAttr];
-                return label ? label.substring(0, datum.r / 3) 
-                    + ' (' + d3.format(',d')(datum.object[valueAttr]) + ')': '';
+                return label ? label.substring(0, datum.r / 3) : '';
+            });
+
+        node.select(".text2")
+            .style('fill', function (datum) {
+                return label_color_fn(datum.group);
+            })
+            .attr('dy', function (datum) {
+                return datum.r/2.5 + 'px';
+            })
+            .style("font-size", function (datum) {
+                return (datum.r/3.6) + "px";
+            })
+            .text(function (datum) {
+                var label = datum.object[labelAttr];
+                var porcentaje = Math.round(datum.object[valueAttr]*100/datum.object[totalAttr]);
+                console.log('total: ', datum.object[totalAttr])
+                console.log('porcentaje: ', porcentaje)
+                return label ? d3.format(',d')(datum.object[valueAttr]) +
+                    ' (' + porcentaje.toString() + '%)': '';
             });
 
 /*

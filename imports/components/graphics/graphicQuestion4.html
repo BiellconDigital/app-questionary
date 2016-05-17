@@ -1,24 +1,47 @@
 <ion-view>
+    <ion-nav-view name="fabContent">
+        <button id="fabTotalVotos" 
+            class="button button-fab button-fab-bottom-right button-energized-900">
+            {{ graphicQuestion4.answers }}
+        </button>
+    </ion-nav-view>
     <ion-content ng-class="{expanded:isExpanded}">
-
         <div class="list animate-fade-slide-in-right skyblue-dark-bg panelTitleGraphic">
         	<div class="item item-text-wrap">
-			    <h3 class="skyblue-color text-center">
-			        Después de este evento:
-			    </h3>
 				<h2 class="light text-center" ng-bind="graphicQuestion4.question.descripcion"></h2>
         	</div>
         </div>
 
-        <div class="slide-up">
-            <div class="content" style="text-align:center;">
-                <div id="graph-legend" class="chart-legend"></div>
-                <canvas id="chartQ4" class="mychart" height="416" width="1200"></canvas>
-<!-- 			    <burble id='fd1' value='{{value}}' ng-model='config' height= "250" width="250"></burble>
-<div ng-bind="value"></div>
- -->			    
-            </div>
-        </div>
+        <ion-content  has-header="true" class="margin-top-gq4">
+                <div class="botonesLaterales vertical-center">
+                    <div>
+                        <a href="/">
+                            <img ng-src="/img/signomenor.png">
+                        </a>
+                    </div>
+                </div>
+                <div class="contenidoCentral-nocenter graphic4">
+                    <div class="chartLegend" style="margin-left:10%;">
+                        <ul>
+                            <li>
+                                <span style="background-color:#0662ab;"></span>Si, el sector privado puede ser un fuerte aliado
+                            </li>
+                            <li>
+                                <span style="background-color:#e41129;"></span>No, la responsabilidad de la educación es sólo del gobierno
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="float:none;padding: 1em 0;width:75%;margin-left:12%;">
+                        <canvas id="chartQ4" class="mychart"></canvas>
+                    </div>
+
+                </div>
+                <div class="botonesLaterales vertical-center">
+                    <div>
+                        <img ng-src="/img/signomayor.png" ui-sref="graphic-question-5">
+                    </div>
+                </div>
+        </ion-content>
 
 
     </ion-content>

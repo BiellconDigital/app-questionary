@@ -22,193 +22,27 @@ class GraphicQuestion4Ctrl {
     $scope.isExpanded = true;
     $scope.$parent.setExpanded(false);
 //    $scope.$parent.setHeaderFab(false);
-
-    // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up',
-            startVelocity: 500
-        });
-    }, 900);
-
+    $scope.widthG = jQuery(window).width() - jQuery(window).width()*0.16,
+    $scope.heightG = jQuery(window).height() - 250,
+    
     $timeout(function() {
         ionicMaterialMotion.fadeSlideInRight({
             startVelocity: 1500
         });
     }, 200);
 
+    jQuery('.graphic4').height(jQuery(window).height() - jQuery(window).height()*0.35),
+
 //    this.subscribe('getByQuestion');
 
    this.helpers({
       answers() {
-        return Answer.find({question: 4});
+        return Answer.find({question: 4}).count();
       },
       question() {
         return Question.findOne({_id: "4"});
       }
    });
-
-/*
-
-var margin = {top: 40, right: 20, bottom: 30, left: 40},
-    width = 1120 - margin.left - margin.right,
-    height = 430 - margin.top - margin.bottom;
-
-//var formatPercent = d3.format(".0%");
-
-// D3 scales = just math
-// x is a function that transforms from "domain" (data) into "range" (usual pixels)
-// domain gets set after the data loads
-var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1);
-
-var y = d3.scale.linear()
-    .range([height, 0]);
-
-// D3 Axis - renders a d3 scale in SVG
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
-
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left");
-
-
-//var tip = d3.tip().html(function(d) { return d; });
-
-var tip = d3_tip()
-  .attr('class', 'd3-tip')
-  .offset([-10, 0])
-  .html(function(d) {
-    return "<strong>Frequency:</strong> <span style='color:red'>" + d.frequency + "</span>";
-  })
-
-
-// create an SVG element (appended to body)
-// set size
-// add a "g" element (think "group")
-// annoying d3 gotcha - the 'svg' variable here is a 'g' element
-// the final line sets the transform on <g>, not on <svg>
-var svg = d3.select("#barQ").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-
-svg.append("g")
-    .attr("class", "y axis")
-  .append("text") // just for the title (ticks are automatic)
-    .attr("transform", "rotate(-90)") // rotate the text!
-    .attr("y", 6)
-    .attr("dy", ".71em")
-    .style("text-anchor", "end")
-    .text("Votantes");
-
-  this.dataBar = [
-    {
-      letter: 'A',
-      frequency: 100
-    },
-    {
-      letter: 'B',
-      frequency: 200
-    },
-    {
-      letter: 'C',
-      frequency: 50
-    },
-  ];
-
-
-//d3.tsv("data.tsv", type, 
-function runBar(data) {
-
-  data.forEach(function(d) {
-    d.frequency = +d.frequency;
-    console.log(d.frequency)
-  });
-
-  // measure the domain (for x, unique letters) (for y [0,maxFrequency])
-  // now the scales are finished and usable
-  x.domain(data.map(function(d) { return d.letter; }));
-  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
-
-  // another g element, this time to move the origin to the bottom of the svg element
-  // someSelection.call(thing) is roughly equivalent to thing(someSelection[i])
-  //   for everything in the selection\
-  // the end result is g populated with text and lines!
-  svg.select('.x.axis').transition().duration(300).call(xAxis)
-    .selectAll("text")
-    .attr("font-size", "1.6em")
-    .style("fill", 'darkblue');
-
-  // same for yAxis but with more transform and a title
-  svg.select(".y.axis").transition().duration(300).call(yAxis)
-
-/*
-svg.selectAll(".bar")
-      .data(data)
-    .enter().append("rect")
-      .style("fill", "steelblue")
-      .attr("x", function(d) { return x(d.letter); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.frequency); })
-      .attr("height", function(d) { return height - y(d.frequency); });
-      // .on('mouseover', tip.show)
-      // .on('mouseout', tip.hide)
-*/
-
-/*
-  // THIS IS THE ACTUAL WORK!
-//  var bars = svg.selectAll(".bar").data(data, function(d) { return d.letter; }) // (data) is an array/iterable thing, second argument is an ID generator function
-  var bars = svg.selectAll(".bar").data(data) // (data) is an array/iterable thing, second argument is an ID generator function
-
-  bars.exit()
-    .transition()
-      .duration(300)
-    .attr("y", y(0))
-    .attr("height", height - y(0))
-    .style('fill-opacity', 1e-6)
-    .remove();
-
-  // data that needs DOM = enter() (a set/selection, not an event!)
-  bars.enter().append("rect")
-//    .style("fill", "steelblue")
-    .attr("class", "barGraphic")
-    .attr("y", y(0))
-    .attr("height", height - y(0));
-
-  // the "UPDATE" set:
-  bars.transition().duration(300).attr("x", function(d) { return x(d.letter); }) // (d) is one item from the data array, x is the scale object from above
-    .attr("width", x.rangeBand()) // constant, so no callback function(d) here
-    .attr("y", function(d) { return y(d.frequency); })
-    .attr("height", function(d) { return height - y(d.frequency); }); // flip the height, because y's domain is bottom up, but SVG renders top down
-
-
-
-/*
-  svg.selectAll(".bar")
-      .data(data)
-    .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.letter); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.frequency); })
-      .attr("height", function(d) { return height - y(d.frequency); })
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide)
-
-*/
-//}
-//});
-//runBar(this.dataBar);
-
-
 
     var optionsPie = {
         //Boolean - Whether we should animate the chart
@@ -217,7 +51,7 @@ svg.selectAll(".bar")
         //Number - Amount of animation steps
         animationSteps : 60,
 
-        scaleShowLabels : false,
+        scaleShowLabels : true,
 
         //String - Animation easing effect
         animationEasing : "",
@@ -229,6 +63,8 @@ svg.selectAll(".bar")
 
         showTooltips: false,
 
+        responsive: true,
+
         onAnimationComplete: function () {
 
           var ctx = this.chart.ctx;
@@ -238,12 +74,25 @@ svg.selectAll(".bar")
           ctx.textBaseline = "bottom";
 
           this.datasets.forEach(function (dataset) {
+              var maxValue = 0
+              dataset.bars.forEach(function (bar) {
+                  if (bar.value > maxValue) {
+                    maxValue = bar.value;
+                  }
+              });
+
               dataset.bars.forEach(function (bar) {
                   ctx.textAlign = 'center';
                   ctx.textBaseline = 'middle';
-                  ctx.fillStyle = 'pink';
-                  ctx.font = 'bold 1.5em Helvetica';
-                  ctx.fillText(bar.value, bar.x, bar.y + 10);
+                  ctx.font = 'bold 2.8em Helvetica';
+                  if (bar.value == maxValue) {
+                    ctx.fillStyle = 'white';
+                    ctx.fillText(bar.value, bar.x, bar.y + 34);
+                  }
+                  else {
+                    ctx.fillStyle = '#1367B5';
+                    ctx.fillText(bar.value, bar.x, bar.y - 18);
+                  }
               });
           })          
 /*
@@ -282,8 +131,8 @@ svg.selectAll(".bar")
 
 
 var data = {
-    labels: ["Si, el sector privado puede ser un fuerte aliado"
-      ,"No, la responsabilidad de la educación es sólo del gobierno"
+    labels: ["SI"
+      ,"NO"
     ],
     datasets: [
         {
@@ -293,16 +142,15 @@ var data = {
             borderWidth: 1,
             hoverBackgroundColor: "rgba(255,99,132,0.4)",
             hoverBorderColor: "rgba(255,99,132,1)",
-            data: [6, 2],
+            data: [0, 0],
         },
     ]
 };
 
     var ctx = $("#chartQ4").get(0).getContext("2d");
     var myNewChart = new Chart(ctx).Bar(data, optionsPie);
-
-//    var legend = myNewChart.generateLegend();
-//    $("#graph-legend").html(legend);
+    // var legend = myNewChart.generateLegend();
+    // $("#graph-legend-g4").html(legend);
 
 
 
@@ -350,12 +198,12 @@ var data = {
           console.log('total si: ', totalSi);
           console.log('datasets: ', myNewChart.datasets)
           myNewChart.datasets[0].bars[0].value = totalSi;
-          myNewChart.datasets[0].bars[0].fillColor = '#7DB8C2';
+          myNewChart.datasets[0].bars[0].fillColor = '#0662ab';
 
           if (wordsAnswerResult.hasOwnProperty('No, la responsabilidad de la educación es sólo del gobierno'))
             totalNo = wordsAnswerResult['No, la responsabilidad de la educación es sólo del gobierno'];
           console.log('total no: ', totalNo);
-          myNewChart.datasets[0].bars[1].fillColor = '#056B71';
+          myNewChart.datasets[0].bars[1].fillColor = '#e41129';
           myNewChart.datasets[0].bars[1].value = totalNo;
 
           myNewChart.update()
