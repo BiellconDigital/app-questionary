@@ -1,10 +1,11 @@
 <ion-view>
     <ion-nav-view name="fabContent">
         <button id="fabTotalVotos" 
-            class="button button-fab button-fab-bottom-right button-energized-900">
-            {{ graphicQuestion4.answers }}
+            class="button button-fab button-fab-bottom-right button-red">
+            Nro. votos: <span>{{ graphicQuestion4.answers }}</span>
         </button>
     </ion-nav-view>
+
     <ion-content ng-class="{expanded:isExpanded}">
         <div class="list animate-fade-slide-in-right skyblue-dark-bg panelTitleGraphic">
         	<div class="item item-text-wrap">
@@ -24,7 +25,7 @@
                     <div class="chartLegend" style="margin-left:10%;">
                         <ul>
                             <li>
-                                <span style="background-color:#0662ab;"></span>Si, el sector privado puede ser un fuerte aliado
+                                <span style="background-color:#0662ab;"></span>Sí, el sector privado puede ser un fuerte aliado
                             </li>
                             <li>
                                 <span style="background-color:#e41129;"></span>No, la responsabilidad de la educación es sólo del gobierno

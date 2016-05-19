@@ -29,6 +29,7 @@ class CuestionaryListCtrl {
 //        console.log('q' + i + ': ', $rootScope.currentUser['q' + i])
         if ($rootScope.currentUser['q' + i] != true) {
           $state.transitionTo('cuestionary', {questionId: i});
+          return;
         }
       };
       $state.transitionTo('completed');
@@ -87,13 +88,13 @@ class CuestionaryListCtrl {
             selector: '.slide-up',
             startVelocity: 500
         });
-    }, 100);
+    }, 500);
 
     $timeout(function() {
         ionicMaterialMotion.fadeSlideInRight({
             startVelocity: 1500
         });
-    }, 900);
+    }, 1000);
 
     // Set Motion
 //    ionicMaterialMotion.fadeSlideInRight();
@@ -155,28 +156,47 @@ class CuestionaryListCtrl {
 
         return;
       }
-      if (this.answerText2 === undefined) {
-        this.answerText = this.answerText1;
+
+      if (this.answerText2 === undefined || this.answerText2 === null) {
+        this.answerText = this.answerText1.split(" ")[0];
       } else {
-        this.answerText = this.answerText1 + ' ' + this.answerText2;
+        this.answerText = this.answerText1.split(" ")[0] + ' ' + this.answerText2.split(" ")[0];
       }
     }
 
+    var rootSco = this.$rootScope;
+    var varState = this.$state;
+    var varQId = this.questionId;
+    var varNQId = this.nextQuestionId;
+    var ionicP = this.$ionicPopup;
     Answer.insert({
       user: this.$rootScope.currentUser._id,
       question: this.questionId,
       text: this.answerText,
       createdAt : new Date()
+    }, function(error, result) {
+        if ( error ) {
+//          console.log ( error );//info about what went wrong
+          alertInputs = ionicP.alert({
+              title : 'Alerta',
+              template: 'Vuelva a intentarlo por favor.'
+          });
+
+        }
+        if ( result ) {
+//          console.log ( result ); //the _id of new object if successful
+          rootSco.currentUser['q' + varQId] = true;
+          localStorage['user'] = JSON.stringify(rootSco.currentUser);
+
+          if (varQId <= 5) {
+            varState.transitionTo('cuestionary', {questionId: varNQId});
+          } else {
+            varState.transitionTo('completed');
+          }
+        }
+
     });
 
-    this.$rootScope.currentUser['q' + this.questionId] = true;
-    localStorage['user'] = JSON.stringify(this.$rootScope.currentUser);
-
-    if (this.questionId <= 5) {
-      this.$state.transitionTo('cuestionary', {questionId: this.nextQuestionId});
-    } else {
-      this.$state.transitionTo('completed');
-    }
   }
 
 }

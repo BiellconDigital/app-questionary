@@ -190,19 +190,19 @@ var data = {
           var totalNo = 0, totalSi = 0;
           result.forEach(function (answer) {
             wordsAnswerResult[answer._id] = answer.count
-            console.log('id: ', answer._id)
+//            console.log('id: ', answer._id)
           });
 
-          if (wordsAnswerResult.hasOwnProperty('Si, el sector privado puede ser un fuerte aliado'))
-            totalSi =wordsAnswerResult['Si, el sector privado puede ser un fuerte aliado'];
-          console.log('total si: ', totalSi);
-          console.log('datasets: ', myNewChart.datasets)
+          if (wordsAnswerResult.hasOwnProperty('Sí, el sector privado puede ser un fuerte aliado'))
+            totalSi =wordsAnswerResult['Sí, el sector privado puede ser un fuerte aliado'];
+          // console.log('total si: ', totalSi);
+          // console.log('datasets: ', myNewChart.datasets)
           myNewChart.datasets[0].bars[0].value = totalSi;
           myNewChart.datasets[0].bars[0].fillColor = '#0662ab';
 
           if (wordsAnswerResult.hasOwnProperty('No, la responsabilidad de la educación es sólo del gobierno'))
             totalNo = wordsAnswerResult['No, la responsabilidad de la educación es sólo del gobierno'];
-          console.log('total no: ', totalNo);
+//          console.log('total no: ', totalNo);
           myNewChart.datasets[0].bars[1].fillColor = '#e41129';
           myNewChart.datasets[0].bars[1].value = totalNo;
 

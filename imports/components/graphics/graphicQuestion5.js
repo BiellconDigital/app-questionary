@@ -65,9 +65,7 @@ class GraphicQuestion5Ctrl {
 
     function draw(t) {
       words = t;
-      console.log("dibujando...", words)
       var n = vis.selectAll("text").data(words, function(t) {
-        console.log('word: ', t);
           return t.key.toLowerCase()
       });
       n.transition().duration(1e3).attr("transform", function(t) {
@@ -116,18 +114,30 @@ class GraphicQuestion5Ctrl {
     function generate() {
         layout.font('Helvetica'),
     //    spiral(d3.select("input[name=spiral]:checked").property("value")), 
-        fontSize = d3.scale['log']().range([10, 100]), 
+        fontSize = d3.scale['log']().range([15, 78]), 
         tags.length && fontSize.domain([+tags[tags.length - 1].value || 1, +tags[0].value]), 
         complete = 0, words = [], 
         layout.stop().words(tags.slice(0, max = Math.min(tags.length, +200))).start()
     }
     /***************************************************************************/
 
+/*function generate() {
+    layout.font(d3.select("#font").property("value")).spiral(d3.select("input[name=spiral]:checked")
+        .property("value")), 
+
+    fontSize = d3.scale[d3.select("input[name=scale]:checked")
+        .property("value")]().range([10, 100]), 
+    tags.length && fontSize.domain([+tags[tags.length - 1].value || 1, +tags[0].value]), complete = 0, 
+    statusText.style("display", null), words = [], 
+        layout.stop().words(tags.slice(0, max = Math.min(tags.length, +d3.select("#max").property("value"))))
+        .start()
+}
+*/
 
 /************* ACTUALIZACION REAL TIME DE GRAFICOS ***************/
     this.autorun(() => {
 
-      console.log(this.getReactively('getByQuestion'));
+//      console.log(this.getReactively('getByQuestion'));
       var wordsAnswerResult = "", totalAnswer = 0;
       this.getReactively('getByQuestion').forEach(function (answer) {
         if (totalAnswer == 0)
@@ -136,7 +146,7 @@ class GraphicQuestion5Ctrl {
           wordsAnswerResult = wordsAnswerResult.concat(" " + answer.text);
         totalAnswer = totalAnswer + 1;
       });
-      console.log("finalizo ", wordsAnswerResult);
+//      console.log("finalizo ", wordsAnswerResult);
 
       if (wordsAnswerResult.length > 0) {
         parseText( wordsAnswerResult );

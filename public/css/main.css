@@ -210,6 +210,11 @@ h1 {
   height: 4.4em !important;
   margin-bottom: 0.3em;
 }
+.question-content-input {
+  height: 4.4em !important;
+  margin-bottom: 0.3em;
+}
+
 
 .help-question-select {
   background-color: white;
@@ -219,11 +224,6 @@ h1 {
   color: rgb(47,169,224) !important;
   line-height: 3.4em;
   font-size: 1.2em
-}
-
-.question-content-input {
-  height: 4.4em !important;
-  margin-bottom: 0.3em;
 }
 
 .help-question-input {
@@ -301,6 +301,71 @@ h1 {
   padding-top: 3.3em;
 }
 
+.button-red {
+  background-color: transparent !important;
+  color: #0662ab !important;
+  box-shadow: none !important;
+  text-align: right !important;
+  padding-right: 1.4em !important;
+}
+
+@media screen and (max-width:640px) {
+  .question-title {
+    height: 13em !important;
+  }
+  .question-title-panel {
+    margin: 0 0.4em;
+    padding-top: 0.3em;
+    height: 13em !important;
+  }
+  .question-title .content {
+    height: 9em;
+    font-size: 1em;
+    margin: 0.5em;
+    padding:0.5em;
+  }
+
+  .footerStandar {
+      height: 3.2em !important;
+  }
+
+  .footerStandar a {
+      font-size: 1.5em;
+      height: 3.2em !important;
+      padding-top: 0.3em;
+  }
+  .next-button {
+    width: 25px;
+  }
+
+  .question-content-select {
+    height: 3.8em !important;
+    margin-bottom: 0.2em;
+  }
+  .help-question-select h5 {
+    line-height: 2.5em;
+    font-size: 1.2em
+  }
+
+
+  .question-content-input {
+    margin-top: 0.2em;
+    height: 4em !important;
+    margin-bottom: 0.3em;
+  }
+  .help-question-input {
+    height: 4em !important;
+  }
+  .help-question-input h5 {
+    font-size: 1.2em;
+    padding-top: .3em;
+    margin-left: 3.9em;
+    margin-right: 3.9em;
+  }
+
+
+}
+
 @media screen and (min-width:800px) {
   .botonesLaterales {
     width:7%;
@@ -362,9 +427,14 @@ h1 {
 }
 
 #fabTotalVotos {
-  width: 3.5em !important;
-  height: 2.7em !important;
-  font-size: 2.1em !important;
+  width: 12.5em !important;
+  height: 2.5em !important;
+  font-size: 1.9em !important;
+  text-transform: none !important;
+}
+
+#fabTotalVotos span {
+  font-size: 1.3em !important;
 }
 
 .chartLegend li {
@@ -422,9 +492,7 @@ h1 {
   }  
 
   #fabTotalVotos {
-    width: 3.9em !important;
-    height: 2.9em !important;
-    font-size: 2.6em !important;
+    font-size: 2.4em !important;
   }
 
   .chartLegend li {

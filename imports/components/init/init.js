@@ -23,14 +23,15 @@ import { User } from '../../api/user/user.js';
 
 import './web.html';
 
-function Init ($scope, $rootScope, $timeout, $reactive, ionicMaterialMotion, ionicMaterialInk) {
+function Init ($scope, $rootScope, $timeout, $reactive, $ionicPopup, $state, $window,
+    ionicMaterialMotion, ionicMaterialInk) {
 
   $rootScope.currentUser = null;
   $reactive(this).attach($scope);
       
   if (localStorage['user'] === undefined) {
 
-      console.log("iniciando insercion");
+//      console.log("iniciando insercion");
 
 
       // Meteor.call('saveUser', {username: 'invitado', completeCuestionary: false, createdAt : new Date()}, 
@@ -38,20 +39,36 @@ function Init ($scope, $rootScope, $timeout, $reactive, ionicMaterialMotion, ion
       //     console.log("usuario insertado");
       //     console.log(result);
       // });
-      var userId = User.insert({username: 'invitado', completeCuestionary: false, createdAt : new Date()});
-      $rootScope.currentUser = {
-        _id: userId,
-        username: 'invitado', completeCuestionary: false, createdAt : new Date(),
-        q1:false, q2:false, q3:false, q4:false, q5:false, q6:false
-      };
+      var userId = User.insert({username: 'invitado', completeCuestionary: false, createdAt : new Date()}
+        , function(error, result) {
+            if ( error ) {
+//              console.log ( error );//info about what went wrong
+              alertInputs = $ionicPopup.alert({
+                  title : 'Alerta',
+                  template: 'No pudimos registrar su acceso. Click en el botón OK para interntar nuevamente.'
+              });
+              alertInputs.then(function(res) {
+                $window.location.reload();
+              });
 
-      //Meteor.subscribe('saveUser', $rootScope.currentUser);
-      console.log($rootScope.currentUser);
-      console.log("finalizando insercion");
-      localStorage['user'] = JSON.stringify($rootScope.currentUser);
+            }
+            if ( result ) {
+//              console.log ( result ); //the _id of new object if successful
+              $rootScope.currentUser = {
+                _id: userId,
+                username: 'invitado', completeCuestionary: false, createdAt : new Date(),
+                q1:false, q2:false, q3:false, q4:false, q5:false, q6:false
+              };
+
+              //Meteor.subscribe('saveUser', $rootScope.currentUser);
+//              console.log($rootScope.currentUser);
+//              console.log("finalizando insercion");
+              localStorage['user'] = JSON.stringify($rootScope.currentUser);
+            }
+        });
   } else {
       $rootScope.currentUser = JSON.parse(localStorage['user']);
-      console.log("usuario registrado");
+//      console.log("usuario registrado");
 //      console.log(localStorage['user']);
   }
 
@@ -136,27 +153,9 @@ function Init ($scope, $rootScope, $timeout, $reactive, ionicMaterialMotion, ion
         }
     };
 
-
-    // Set Header
-//    $scope.showHeader();
-//    $scope.clearFabs();
-//    $scope.isExpanded = false;
-//    $scope.setExpanded(false);
-//    $scope.setHeaderFab(false);
-
-    // Set Motion
-
-/*    $timeout(function() {
-        ionicMaterialMotion.fadeSlideInRight({
-            startVelocity: 3000
-        });
-    }, 700);
-*/
-    // Set Ink
-//    ionicMaterialInk.displayEffect();
-
 }
-Init.$inject = ["$scope", "$rootScope", "$timeout", "$reactive", "ionicMaterialMotion", "ionicMaterialInk"];
+Init.$inject = ["$scope", "$rootScope", "$timeout", "$reactive", "$ionicPopup", "$state", "$window",
+  "ionicMaterialMotion", "ionicMaterialInk"];
 
 
 const name = 'init';
@@ -221,7 +220,6 @@ function config($locationProvider, $urlRouterProvider, $compileProvider, $logPro
 
 function run($rootScope, $state, $ionicPlatform) {
   'ngInject';
-  console.log("init run...")
 
   $rootScope.$on('$stateChangeError',
     (event, toState, toParams, fromState, fromParams, error) => {
@@ -244,129 +242,3 @@ function run($rootScope, $state, $ionicPlatform) {
   });
 
 }
-
-
-/*
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-import { Tasks } from '../imports/api/tasks.js';
-
-import './main.html';
-
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
-
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
-
-
-Template.graph.topGenresChart = function() {
-    return {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false
-        },
-        title: {
-            text: this.username + "'s top genres"
-        },
-        tooltip: {
-            pointFormat: '<b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    },
-                    connectorColor: 'silver'
-                }
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'genre',
-            data: [
-                ['Adventure',   45.0],
-                ['Action',       26.8],
-                ['Ecchi',   12.8],
-                ['Comedy',    8.5],
-                ['Yuri',     6.2]
-            ]
-        }]
-    };
-};
-
-
-
-
-
-Template.chart.onCreated(function() {
-	console.log("suscribiendo...")
-  	chart1 = this.subscribe('chart1');
-});
-  
-  drawchart = function(datavalues,datalabels){
-
-     var data = {
-    labels: datalabels,
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,0,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: datavalues,
-            
-        },
-       
-    ]
-}; 
-   var ctx = $("#myChart").get(0).getContext("2d");
-    new Chart(ctx).Line(data);
-    console.log("drawchart...")
-  };
- 
-    
-Template.chart.rendered = function(){
-      
-	console.log("rendered...")
-	Tracker.autorun(function () {
-		console.log("autorun...")
-          //if (chart1.ready()) {
-          	//console.log("ready...")
-                var budgetdata = Tasks.find();
-                var datavalues=[];
-                var datalabels=[];
-                budgetdata.forEach(function(option) {
-                    console.log(option.value);
-                    datavalues.push(option.value);
-                    datalabels.push(option.itemname)
-                });
-             
-                drawchart(datavalues,datalabels);
-         //}   
-    
-	});
-};
-
-*/

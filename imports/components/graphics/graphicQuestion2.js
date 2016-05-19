@@ -66,9 +66,9 @@ class GraphicQuestion2Ctrl {
 
     function draw(t) {
       words = t;
-      console.log("dibujando...", words)
+//      console.log("dibujando...", words)
       var n = vis.selectAll("text").data(words, function(t) {
-        console.log('word: ', t);
+//        console.log('word: ', t);
           return t.key.toLowerCase()
       });
       n.transition().duration(1e3).attr("transform", function(t) {
@@ -117,7 +117,7 @@ class GraphicQuestion2Ctrl {
     function generate() {
         layout.font('Helvetica'),
     //    spiral(d3.select("input[name=spiral]:checked").property("value")), 
-        fontSize = d3.scale['log']().range([10, 100]), 
+        fontSize = d3.scale['log']().range([15, 78]), 
         tags.length && fontSize.domain([+tags[tags.length - 1].value || 1, +tags[0].value]), 
         complete = 0, words = [], 
         layout.stop().words(tags.slice(0, max = Math.min(tags.length, +200))).start()
@@ -127,7 +127,7 @@ class GraphicQuestion2Ctrl {
 
 /************* ACTUALIZACION REAL TIME DE GRAFICOS ***************/
     this.autorun(() => {
-      console.log(this.getReactively('getByQuestion'));
+//      console.log(this.getReactively('getByQuestion'));
       var wordsAnswerResult = "", totalAnswer = 0;
       this.getReactively('getByQuestion').forEach(function (answer) {
         if (totalAnswer == 0)
@@ -137,7 +137,7 @@ class GraphicQuestion2Ctrl {
         totalAnswer = totalAnswer + 1;
 //        wordsAnswerResult.push(answer.text);
       });
-      console.log("finalizo ", wordsAnswerResult);
+//      console.log("finalizo ", wordsAnswerResult);
 
       if (wordsAnswerResult.length > 0) {
         parseText( wordsAnswerResult );

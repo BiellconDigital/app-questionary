@@ -10,8 +10,8 @@
           </div>
         </div>
 
-        <div class="hero question-content-select slide-up">
-            <div class="content">
+        <div  class="slide-up">
+            <div ng-class="styleContentHelp" class="hero ">
                 <div ng-class="styleHelp">
                   <h5>{{ textPanelQuestion }}</h5>
                 </div>
@@ -21,18 +21,11 @@
 
         <div class="content list-options" ng-if="cuestionary.questionId == 1">
             <div class="list animate-fade-slide-in-right">
-               <label class="item item-radio">
-                  <input type="radio" name="group1" ng-model="cuestionary.anwserP1" ng-value="'Nada probable'">
-                  <div class="item-content">
-                     Nada probable
-                  </div>
-                  <i class="radio-icon ion-checkmark"></i>
-               </label>
 
                <label class="item item-radio">
-                  <input type="radio" name="group1" ng-model="cuestionary.anwserP1" ng-value="'Poco probable'">
+                  <input type="radio" name="group1" ng-model="cuestionary.anwserP1" ng-value="'Muy probable'">
                   <div class="item-content">
-                     Poco probable
+                     Muy probable
                   </div>
                   <i class="radio-icon ion-checkmark"></i>
                </label>
@@ -46,12 +39,21 @@
                </label>
 
                <label class="item item-radio">
-                  <input type="radio" name="group1" ng-model="cuestionary.anwserP1" ng-value="'Muy probable'">
+                  <input type="radio" name="group1" ng-model="cuestionary.anwserP1" ng-value="'Poco probable'">
                   <div class="item-content">
-                     Muy probable
+                     Poco probable
                   </div>
                   <i class="radio-icon ion-checkmark"></i>
                </label>
+
+               <label class="item item-radio">
+                  <input type="radio" name="group1" ng-model="cuestionary.anwserP1" ng-value="'Nada probable'">
+                  <div class="item-content">
+                     Nada probable
+                  </div>
+                  <i class="radio-icon ion-checkmark"></i>
+               </label>
+
             </div>
         </div>
 
@@ -59,17 +61,17 @@
           ng-if="cuestionary.questionId == 2 || cuestionary.questionId == 5">
             <div class="list animate-fade-slide-in-right" >
 
-  <label class="item item-input" style="margin:1.3em;">
-    <input type="text" placeholder="Palabra uno"
-      required ng-minlength="3" ng-maxlength="16" ng-trim="true"
-      ng-model="cuestionary.answerText1">
-  </label>
-  <label class="item item-input" style="margin:1.3em;">
-    <input type="text" placeholder="Palabra dos"
-      ng-minlength="3" ng-maxlength="16" ng-trim="true" 
-      ng-model="cuestionary.answerText2"
-    >
-  </label>
+              <label class="item item-input" style="margin:1.3em;">
+                <input type="text" placeholder="Palabra uno"
+                  required ng-minlength="3" ng-maxlength="16" ng-trim="true"
+                  ng-model="cuestionary.answerText1">
+              </label>
+              <label class="item item-input" style="margin:1.3em;">
+                <input type="text" placeholder="Palabra dos"
+                  ng-minlength="3" ng-maxlength="16" ng-trim="true" 
+                  ng-model="cuestionary.answerText2"
+                >
+              </label>
 
             </div>
         </div>
@@ -100,9 +102,9 @@
             <div class="list light animate-fade-slide-in-right">
                <label class="item item-radio item-text-wrap">
                   <input type="radio" name="group1" ng-model="cuestionary.anwserP4" 
-                    ng-value="'Si, el sector privado puede ser un fuerte aliado'">
+                    ng-value="'Sí, el sector privado puede ser un fuerte aliado'">
                   <div class="item-content" style="padding-top:1.2em;padding-bottom:1.2em;">
-                    Si, el sector privado puede ser un fuerte aliado
+                    Sí, el sector privado puede ser un fuerte aliado
                   </div>
                   <i class="radio-icon ion-checkmark"></i>
                </label>

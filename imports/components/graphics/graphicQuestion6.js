@@ -90,10 +90,12 @@ class GraphicQuestion6Ctrl {
 //            this.chart.ctx.fillText('Total: ' + total , this.chart.width / 2 - 90, this.chart.height / 2, 100);
 
             for(var i = 0; i < this.segments.length; i++) {
-              var percentage = ((this.segments[i].value / total) * 100).toFixed(1);
+              var percentage = Math.round((this.segments[i].value / total) * 100);
               if( percentage > 3 ) {
-                  var centreAngle = this.segments[i].startAngle + ((this.segments[i].endAngle - this.segments[i].startAngle) / 2),
-                      rangeFromCentre = (this.segments[i].outerRadius - this.segments[i].innerRadius) / 2 + this.segments[i].innerRadius;
+                  var centreAngle = this.segments[i].startAngle 
+                    + ((this.segments[i].endAngle - this.segments[i].startAngle) / 2),
+                  rangeFromCentre = (this.segments[i].outerRadius - this.segments[i].innerRadius) / 2 
+                    + this.segments[i].innerRadius;
                   var x = this.segments[i].x + (Math.cos(centreAngle) * rangeFromCentre);
                   var y = this.segments[i].y + (Math.sin(centreAngle) * rangeFromCentre);
                   this.chart.ctx.textAlign = 'center';
@@ -102,7 +104,7 @@ class GraphicQuestion6Ctrl {
 
                   this.chart.ctx.font = 'bold ' 
                     +  (jQuery(window).width() > 1350 ? '2.1': '1.4') + 'em Helvetica';
-                  this.chart.ctx.fillText(percentage + '% (' +  this.segments[i].value + ')', x-13, y);
+                  this.chart.ctx.fillText(percentage + '% (' +  this.segments[i].value + ')', x-11, y);
               }
             }
 
@@ -149,17 +151,17 @@ class GraphicQuestion6Ctrl {
           var totalNo = 0, totalSi = 0;
           result.forEach(function (answer) {
             wordsAnswerResult[answer._id] = answer.count
-            console.log('id: ', answer._id)
+//            console.log('id: ', answer._id)
           });
 
           if (wordsAnswerResult.hasOwnProperty('Si'))
             totalSi =wordsAnswerResult['Si'];
-          console.log('total si: ', totalSi);
+//          console.log('total si: ', totalSi);
           myNewChart.segments[0].value = totalSi;
 
           if (wordsAnswerResult.hasOwnProperty('No'))
             totalNo = wordsAnswerResult['No'];
-          console.log('total no: ', totalNo);
+//          console.log('total no: ', totalNo);
           myNewChart.segments[1].value = totalNo;
 
           myNewChart.update()

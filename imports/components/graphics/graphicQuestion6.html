@@ -1,10 +1,11 @@
-<ion-view class="">
+<ion-view>
     <ion-nav-view name="fabContent">
         <button id="fabTotalVotos" 
-            class="button button-fab button-fab-bottom-right button-energized-900">
-            {{ graphicQuestion6.answers }}
+            class="button button-fab button-fab-bottom-right button-red">
+            Nro. votos: <span>{{ graphicQuestion6.answers }}</span>
         </button>
     </ion-nav-view>
+
     <ion-content ng-class="{expanded:isExpanded}">
 
         <div class="list animate-fade-slide-in-right skyblue-dark-bg panelTitleGraphic">

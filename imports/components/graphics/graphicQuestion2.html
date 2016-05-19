@@ -1,13 +1,12 @@
 <ion-view>
-
     <ion-nav-view name="fabContent">
         <button id="fabTotalVotos" 
-            class="button button-fab button-fab-bottom-right button-energized-900">
-            {{ graphicQuestion2.getTotalByQuestion }}
+            class="button button-fab button-fab-bottom-right button-red">
+            Nro. votos: <span>{{ graphicQuestion2.getTotalByQuestion }}</span>
         </button>
     </ion-nav-view>
-    <ion-content ng-class="{expanded:isExpanded}">
 
+    <ion-content ng-class="{expanded:isExpanded}">
         <div class="list animate-fade-slide-in-right skyblue-dark-bg panelTitleGraphic">
         	<div class="item item-text-wrap">
 				<h2 class="light text-center" ng-bind="graphicQuestion2.question.descripcion"></h2>

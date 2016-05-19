@@ -5,6 +5,7 @@ import { Answer } from '../imports/api/answer/answer.js';
 import { User } from '../imports/api/user/user.js';
 import { Tasks } from '../imports/api/tasks.js';
 
+
 /*Meteor.publish("chart1", function () {
     return Tasks.find({},{value:1,itemname:1,_id:0});
 });
@@ -41,7 +42,7 @@ Meteor.startup(() => {
 
 	Question.insert({
 		_id: "2",
-		descripcion: 'Qué palabras representan mejor para ustedes la integración de los 4 países en términos de empleabilidad y educación?',
+		descripcion: '¿Qué palabras representan mejor para ustedes la integración de los 4 países en términos de empleabilidad y educación?',
 		detalle: '(Pregunta abierta - Responder en máximo 2 palabras)'
 	});
 	

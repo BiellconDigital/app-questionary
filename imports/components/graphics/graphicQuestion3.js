@@ -103,14 +103,14 @@ class GraphicQuestion3Ctrl {
           result.forEach(function (answer) {
             wordsAnswerResult[answer._id] = answer.count
             total = total + answer.count;
-            console.log('id: ', answer._id)
+//            console.log('id: ', answer._id)
           });
-          console.log('total: ', total);
+//          console.log('total: ', total);
 
           if (wordsAnswerResult.hasOwnProperty('Si')) {
             totalSi =wordsAnswerResult['Si'];
           }
-          console.log('CANTIDAD SI: ', Math.round((100.0*wordsAnswerResult['Si']) / total));
+//          console.log('CANTIDAD SI: ', Math.round((100.0*wordsAnswerResult['Si']) / total));
           burbleSi.update(Math.round((100.0*totalSi) / total), totalSi)
             //updateValue(Math.round((100.0*wordsAnswerResult['Si']) / total));
 //            $scope.value = Math.round((100.0*wordsAnswerResult['Si']) / total) ;
