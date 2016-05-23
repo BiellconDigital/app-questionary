@@ -1,5 +1,10 @@
 {
   "public": {
 
-  }
+  },
+  "galaxy.meteor.com": { 
+     "env": { 
+       "MONGO_URL": "mongodb://tonyprr:nestle@ds011943.mlab.com:11943/nestle-cuestionary" 
+     } 
+   }
 }
